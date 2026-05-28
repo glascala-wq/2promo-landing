@@ -1,0 +1,95 @@
+---
+interface Props {
+  metaPixelId?: string;
+}
+const { metaPixelId = '1547004352951203' } = Astro.props;
+---
+
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 right-0 z-50 bg-ink text-cream p-6 md:p-8 shadow-2xl"
+  style="display:none;"
+>
+  <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-start md:items-center gap-6">
+    <div class="flex-1">
+      <p class="text-sm text-cream/90 leading-relaxed">
+        Utilizziamo cookie analitici e di marketing per migliorare la vostra esperienza e personalizzare i contenuti.
+        Accettando, ci permettete di capire come usate il sito e mostrarvi pubblicità rilevante.
+        <a href="/privacy" class="underline hover:text-orange transition">Privacy Policy</a> ·
+        <a href="/cookie" class="underline hover:text-orange transition">Cookie Policy</a>
+      </p>
+    </div>
+    <div class="flex gap-3 flex-shrink-0">
+      <button
+        id="cookie-reject"
+        class="px-5 py-3 text-sm font-bold border-2 border-cream/30 text-cream/70 rounded-full hover:border-cream transition"
+      >
+        Solo necessari
+      </button>
+      <button
+        id="cookie-accept"
+        class="btn-orange px-6 py-3 text-sm font-bold bg-orange text-cream rounded-full hover:bg-cream hover:text-ink transition"
+      >
+        Accetta tutti
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ metaPixelId }}>
+  (function() {
+    var banner = document.getElementById('cookie-banner');
+    var accepted = localStorage.getItem('cookie_consent');
+
+    // Se consenso già dato, applica subito
+    if (accepted === 'accepted') {
+      updateConsent(true);
+      loadMetaPixel(metaPixelId);
+      return;
+    }
+    if (accepted === 'rejected') {
+      return;
+    }
+
+    // Mostra banner
+    if (banner) banner.style.display = '';
+
+    document.getElementById('cookie-accept')?.addEventListener('click', function() {
+      localStorage.setItem('cookie_consent', 'accepted');
+      updateConsent(true);
+      loadMetaPixel(metaPixelId);
+      if (banner) banner.style.display = 'none';
+    });
+
+    document.getElementById('cookie-reject')?.addEventListener('click', function() {
+      localStorage.setItem('cookie_consent', 'rejected');
+      if (banner) banner.style.display = 'none';
+    });
+
+    function updateConsent(granted) {
+      if (typeof gtag === 'function') {
+        gtag('consent', 'update', {
+          ad_storage: granted ? 'granted' : 'denied',
+          analytics_storage: granted ? 'granted' : 'denied',
+          ad_user_data: granted ? 'granted' : 'denied',
+          ad_personalization: granted ? 'granted' : 'denied'
+        });
+      }
+    }
+
+    function loadMetaPixel(pixelId) {
+      if (window._fbqLoaded) return;
+      window._fbqLoaded = true;
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', pixelId);
+      fbq('track', 'PageView');
+    }
+  })();
+</script>

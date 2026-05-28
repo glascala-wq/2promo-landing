@@ -1,0 +1,201 @@
+/* ===== FONTSOURCE — Self-hosted ===== */
+@import '@fontsource/archivo-black/400.css';
+@import '@fontsource/work-sans/300.css';
+@import '@fontsource/work-sans/700.css';
+@import '@fontsource/work-sans/300-italic.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== BASE ===== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    background: #F8F7F2;
+    color: #292929;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* ===== BRAND UTILITIES ===== */
+@layer components {
+  .font-display {
+    font-family: 'Archivo Black', sans-serif;
+    letter-spacing: -0.02em;
+  }
+  .font-display-tight {
+    font-family: 'Archivo Black', sans-serif;
+    letter-spacing: -0.04em;
+  }
+  .eyebrow {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+
+  /* ===== MARQUEE ===== */
+  .marquee-track {
+    animation: marquee 35s linear infinite;
+    will-change: transform;
+  }
+  .marquee-track-fast {
+    animation: marquee 22s linear infinite;
+  }
+
+  /* ===== DECORATIVE ===== */
+  .glow-orange {
+    background: radial-gradient(ellipse at center, rgba(254, 80, 0, 0.18) 0%, rgba(254, 80, 0, 0) 60%);
+  }
+  .underline-orange {
+    background-image: linear-gradient(120deg, #FE5000, #FE5000);
+    background-repeat: no-repeat;
+    background-size: 100% 0.18em;
+    background-position: 0 92%;
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn-orange {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .btn-orange::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.9s ease;
+  }
+  .btn-orange:hover::after {
+    transform: translateX(100%);
+  }
+
+  /* ===== CAT CARDS ===== */
+  .cat-card {
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+  }
+  .cat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 30px 60px -20px rgba(28, 31, 42, 0.28);
+  }
+  .cat-card .cat-tag {
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s ease;
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  .cat-card:hover .cat-tag {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* ===== KINETIC TEXT ===== */
+  .kinetic-word {
+    display: inline-block;
+    transform-origin: center;
+  }
+
+  /* ===== PILL ROTATE ===== */
+  .pill-rotate {
+    transform: rotate(-3deg);
+  }
+
+  /* ===== COUNTER ===== */
+  .big-num {
+    font-feature-settings: "tnum";
+    line-height: 0.85;
+  }
+
+  /* ===== NAVBAR ===== */
+  .nav-shrunk {
+    backdrop-filter: blur(12px);
+    background: rgba(248, 247, 242, 0.92);
+    box-shadow: 0 1px 0 rgba(28, 31, 42, 0.06);
+  }
+  .nav-link.active {
+    color: #FE5000;
+  }
+  .nav-link.active::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: #FE5000;
+    margin-top: 4px;
+  }
+
+  /* ===== FAQ ACCORDION ===== */
+  details.faq-item summary {
+    list-style: none;
+  }
+  details.faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  details.faq-item .faq-icon {
+    transition: transform 0.3s ease;
+  }
+  details.faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  /* ===== SCRIBBLE SVG ANIMATION ===== */
+  .scribble {
+    stroke: #FE5000;
+    stroke-width: 4;
+    fill: none;
+    stroke-linecap: round;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: scribble 1.4s ease-out forwards;
+    animation-delay: 0.6s;
+  }
+
+  /* ===== SHOP PILL ===== */
+  .shop-pill {
+    background: #292929;
+    color: #F8F7F2;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s ease;
+    text-decoration: none;
+  }
+  .shop-pill:hover {
+    background: #FE5000;
+  }
+  .shop-pill::after {
+    content: '↗';
+    font-size: 11px;
+    opacity: 0.7;
+  }
+}
+
+/* ===== KEYFRAMES ===== */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes scribble {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}

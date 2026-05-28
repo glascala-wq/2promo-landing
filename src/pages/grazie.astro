@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import UrgencyBar from '../components/UrgencyBar.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Grazie — 2promo.it"
+  description="Richiesta ricevuta! Vi risponderemo al più presto con preventivo e bozza visiva."
+  noindex={true}
+>
+  <UrgencyBar />
+  <Navbar />
+
+  <header class="relative overflow-hidden bg-cream min-h-[60vh] flex items-center">
+    <div class="absolute inset-0 glow-orange pointer-events-none"></div>
+    <div class="relative max-w-4xl mx-auto px-6 py-24 text-center">
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-orange text-cream text-4xl mb-8" data-reveal>✓</div>
+      <h1 class="font-display-tight text-6xl md:text-8xl text-ink leading-[0.9] mb-6" data-reveal>
+        Ricevuto.
+      </h1>
+      <p class="text-2xl md:text-3xl text-ink/75 max-w-2xl mx-auto mb-10 leading-relaxed" data-reveal>
+        Vi risponderemo <strong class="text-ink">al più presto</strong> con preventivo + bozza visiva.
+      </p>
+      <p class="text-ink/60 max-w-xl mx-auto" data-reveal>
+        <strong class="text-ink">P.S.</strong> nel frattempo, qual è il gadget peggiore che avete mai ricevuto? Rispondete alla mail di conferma — vi promettiamo qualcosa di molto migliore.
+      </p>
+    </div>
+  </header>
+
+  <section class="bg-cream pb-24 md:pb-28">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <a
+          href="/catalogo"
+          class="cat-card block bg-cream border-2 border-ink/15 rounded-2xl p-6 hover:border-orange transition"
+          style="text-decoration:none;"
+        >
+          <div class="eyebrow text-ink/60 mb-3">mentre aspettate</div>
+          <h3 class="font-display text-2xl text-ink mb-2">Sfogliate il catalogo</h3>
+          <p class="text-ink/70 text-sm">268 pagine, 30.000+ articoli. Magari trovate altre idee.</p>
+        </a>
+        <a
+          href="/#preventivo"
+          class="cat-card block bg-cream border-2 border-ink/15 rounded-2xl p-6 hover:border-orange transition"
+          style="text-decoration:none;"
+        >
+          <div class="eyebrow text-ink/60 mb-3">non l'avete letta</div>
+          <h3 class="font-display text-2xl text-ink mb-2">Leggete le FAQ</h3>
+          <p class="text-ink/70 text-sm">Tempi, MOQ, processo. Le solite domande, risposte oneste.</p>
+        </a>
+        <a
+          href="https://www.linkedin.com/company/2promo/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="cat-card block bg-ink text-cream rounded-2xl p-6 hover:bg-orange transition"
+          style="text-decoration:none;"
+        >
+          <div class="eyebrow text-cream/60 mb-3">stalker professionali</div>
+          <h3 class="font-display text-2xl mb-2">Seguiteci su LinkedIn ↗</h3>
+          <p class="text-cream/70 text-sm">Mostrare il nostro lavoro ai social network sembrava una buona idea.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<!-- Google Ads + GA4 conversion tracking -->
+<script is:inline>
+  (function() {
+    if (typeof gtag === 'function') {
+      // Google Ads conversion
+      gtag('event', 'conversion', {
+        send_to: 'AW-16941964190/preventivo_lead',
+      });
+      // GA4 lead event
+      gtag('event', 'generate_lead', {
+        currency: 'EUR',
+      });
+    }
+    // Meta Pixel lead event (if loaded)
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead');
+    }
+  })();
+</script>

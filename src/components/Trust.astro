@@ -1,0 +1,50 @@
+---
+interface Props {
+  variant?: 'marquee' | 'grid';
+}
+const { variant = 'marquee' } = Astro.props;
+
+const clients = [
+  'RED BULL', 'LEONARDO', 'CROCE ROSSA', 'RHEINMETALL', 'PRATO NEVOSO',
+  'BINANCE', 'EDILIZIACROBATICA', 'WONDERBOX', 'RDS', 'AFRY', 'MEDIAWORLD', 'RADIO ITALIA'
+];
+
+const highlightedClients = new Set(['CROCE ROSSA', 'EDILIZIACROBATICA', 'MEDIAWORLD']);
+---
+
+{variant === 'marquee' ? (
+  <section class="bg-ink text-cream py-10 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 mb-6 flex items-center gap-3">
+      <span class="w-8 h-px bg-cream/40"></span>
+      <span class="eyebrow text-cream/60">si fidano di noi</span>
+    </div>
+    <div class="relative">
+      <div class="flex gap-16 marquee-track whitespace-nowrap">
+        <div class="flex gap-16 items-center text-3xl font-display tracking-wider opacity-70">
+          {clients.map(c => (
+            <span class={highlightedClients.has(c) ? 'text-orange' : ''}>{c}</span>
+          ))}
+        </div>
+        <div class="flex gap-16 items-center text-3xl font-display tracking-wider opacity-70" aria-hidden="true">
+          {clients.map(c => (
+            <span class={highlightedClients.has(c) ? 'text-orange' : ''}>{c}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+) : (
+  <section class="bg-cream py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-center gap-3 mb-10">
+        <span class="w-8 h-px bg-ink"></span>
+        <span class="eyebrow text-ink/70">si fidano di noi</span>
+      </div>
+      <div class="flex flex-wrap gap-x-12 gap-y-6 items-center">
+        {clients.map(c => (
+          <span class={`font-display text-2xl tracking-wider ${highlightedClients.has(c) ? 'text-orange' : 'text-ink/50'}`}>{c}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

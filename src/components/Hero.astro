@@ -1,0 +1,93 @@
+---
+interface Props {
+  variant?: 'home' | 'custom';
+}
+const { variant = 'home' } = Astro.props;
+---
+
+{variant === 'home' ? (
+  <header class="relative overflow-hidden">
+    <div class="absolute inset-0 glow-orange pointer-events-none"></div>
+    <div class="relative max-w-7xl mx-auto px-6 pt-16 pb-24 md:pt-24 md:pb-32">
+      <div class="flex items-center gap-3 mb-8" data-reveal>
+        <span class="w-8 h-px bg-ink"></span>
+        <span class="eyebrow text-ink/70">— ciao, siamo</span>
+      </div>
+      <h1 class="font-display-tight text-[14vw] md:text-[8.5vw] leading-[0.85] text-ink mb-4 md:mb-6" data-reveal>
+        2promo<span class="text-orange">.</span>it.
+      </h1>
+      <h2 class="font-display-tight text-[7vw] md:text-[4.5vw] leading-[0.95] text-ink/85 mb-10 max-w-5xl" data-reveal>
+        Stampiamo su
+        <span class="relative inline-block kinetic-word" id="kinetic">
+          <span id="kinetic-word">tutto</span>
+          <svg class="absolute -bottom-2 left-0 w-full" height="14" viewBox="0 0 400 14" preserveAspectRatio="none" aria-hidden="true">
+            <path class="scribble" d="M5 9 Q 100 1 200 8 T 395 6"/>
+          </svg>
+        </span>,
+        <em class="not-italic font-display-tight text-orange">per davvero</em>.
+      </h2>
+      <p class="text-xl md:text-2xl text-ink/75 max-w-2xl mb-12 leading-relaxed" data-reveal>
+        Il vostro reparto gadget aziendali. Online.<br>
+        <strong class="text-ink font-bold">30.000+ articoli</strong> pronti per il vostro logo, e se non c'è — lo creiamo.
+      </p>
+      <div class="flex flex-wrap items-center gap-4 mb-16" data-reveal>
+        <a
+          href="#preventivo"
+          class="btn-orange bg-orange text-cream px-8 py-5 text-base font-bold tracking-wide rounded-full hover:bg-ink transition shadow-lg shadow-orange/20"
+          style="text-decoration:none;"
+        >
+          Richiedi Preventivo →
+        </a>
+        <a
+          href="/catalogo"
+          class="border-2 border-ink text-ink px-8 py-5 text-base font-bold tracking-wide rounded-full hover:bg-ink hover:text-cream transition"
+          style="text-decoration:none;"
+        >
+          Sfoglia il catalogo
+        </a>
+        <span class="pill-rotate ml-0 md:ml-6 mt-4 md:mt-0 inline-block bg-cream border-2 border-dashed border-ink/40 text-ink/80 px-5 py-3 text-sm font-bold rounded-full">
+          P.S. se non si stampa, ti paghiamo da bere
+        </span>
+      </div>
+      <div class="flex flex-wrap gap-6 text-sm text-ink/60 border-t border-ink/10 pt-6">
+        <span>★★★★★ <strong class="text-ink">4.9</strong> da clienti come Red Bull, Leonardo, Croce Rossa</span>
+        <span class="hidden md:inline">·</span>
+        <span>Bozza visiva <strong class="text-ink">gratuita</strong> inclusa</span>
+        <span class="hidden md:inline">·</span>
+        <span>Made in Italy <strong class="text-ink">dal 2014</strong></span>
+      </div>
+    </div>
+  </header>
+) : (
+  <header class="relative overflow-hidden bg-cream">
+    <div class="absolute inset-0 glow-orange pointer-events-none opacity-60"></div>
+    <div class="relative max-w-7xl mx-auto px-6 pt-16 pb-20 md:pt-24 md:pb-28">
+      <div class="flex items-center gap-3 mb-6" data-reveal>
+        <span class="w-8 h-px bg-orange"></span>
+        <span class="eyebrow text-orange">linea custom · una sezione di 2promo</span>
+      </div>
+      <h1 class="font-display-tight text-[10vw] md:text-[6.5vw] leading-[0.9] text-ink mb-6 max-w-5xl" data-reveal>
+        Quando il catalogo<br>non basta, parte<br>la <span class="underline-orange">creatività vera</span>.
+      </h1>
+      <p class="text-xl md:text-2xl text-ink/75 max-w-3xl mb-10 leading-relaxed" data-reveal>
+        Lo abbiamo già detto: <strong class="text-ink">se non c'è, lo facciamo nascere</strong>. Forme custom, stampa edge-to-edge, Pantone esatti, MOQ da 10 pezzi. Sempre 2promo, solo un filo più tecnico.
+      </p>
+      <div class="flex flex-wrap items-center gap-4" data-reveal>
+        <a
+          href="#preventivo"
+          class="btn-orange bg-orange text-cream px-8 py-5 text-base font-bold tracking-wide rounded-full hover:bg-ink transition shadow-lg shadow-orange/20"
+          style="text-decoration:none;"
+        >
+          Richiedi Preventivo Custom →
+        </a>
+        <a
+          href="/"
+          class="border-2 border-ink text-ink px-8 py-5 text-base font-bold tracking-wide rounded-full hover:bg-ink hover:text-cream transition"
+          style="text-decoration:none;"
+        >
+          ← Torna al catalogo standard
+        </a>
+      </div>
+    </div>
+  </header>
+)}

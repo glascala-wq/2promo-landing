@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import UrgencyBar from '../components/UrgencyBar.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Trust from '../components/Trust.astro';
+import Counters from '../components/Counters.astro';
+import Categories from '../components/Categories.astro';
+import Showcase from '../components/Showcase.astro';
+import EscapeHatchCustom from '../components/EscapeHatchCustom.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Faq from '../components/Faq.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Footer from '../components/Footer.astro';
+
+const faqItems = [
+  {
+    q: 'MOQ minimo?',
+    a: '50 pezzi sul catalogo standard, <strong class="text-ink">10 pezzi sulla linea custom</strong>. Per quantità sotto contattateci comunque, qualcosa ci inventiamo.',
+    open: true,
+  },
+  {
+    q: 'Tempi di consegna?',
+    a: '<strong class="text-ink">7 giorni</strong> dalla conferma per il catalogo, <strong class="text-ink">12-15 giorni</strong> per la linea custom.',
+  },
+  {
+    q: 'Posso vedere una bozza prima di pagare?',
+    a: '<strong class="text-ink">Sì, sempre.</strong> Bozza visiva inclusa nel preventivo, gratuita. Approvate prima, pagate dopo.',
+  },
+  {
+    q: 'Quanto tempo siete sul mercato?',
+    a: 'Dal <strong class="text-ink">2014</strong>. Dodici anni di stampa, e ne abbiamo viste di tutti i colori (Pantone esatti).',
+  },
+];
+---
+
+<BaseLayout
+  title="2promo.it — Gadget aziendali personalizzati. Stampiamo su tutto."
+  description="Gadget aziendali personalizzati B2B. 30.000+ articoli a catalogo, linea custom edge-to-edge con MOQ da 10 pezzi. Made in Italy dal 2014."
+>
+  <UrgencyBar />
+  <Navbar activeRoute="home" />
+  <Hero variant="home" />
+  <Trust variant="marquee" />
+  <Counters />
+  <Categories />
+  <Showcase />
+  <EscapeHatchCustom />
+  <HowItWorks variant="standard" />
+  <Faq items={faqItems} />
+  <ContactForm id="preventivo" />
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import UrgencyBar from '../components/UrgencyBar.astro';
+import Navbar from '../components/Navbar.astro';
+import CatalogForm from '../components/CatalogForm.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Catalogo 2promo.it — 268 pagine, 30.000+ articoli"
+  description="Sfoglia il catalogo completo 2promo: 268 pagine, 30.000+ articoli personalizzabili. Ricevi il PDF via email o sfoglialo online."
+>
+  <UrgencyBar />
+  <Navbar activeRoute="catalogo" />
+
+  <header class="relative overflow-hidden bg-cream">
+    <div class="absolute inset-0 glow-orange pointer-events-none opacity-40"></div>
+    <div class="relative max-w-7xl mx-auto px-6 pt-16 pb-12 md:pt-20 md:pb-16">
+      <div class="flex items-center gap-3 mb-6" data-reveal>
+        <span class="w-8 h-px bg-ink"></span>
+        <span class="eyebrow text-ink/70">— il catalogo</span>
+      </div>
+      <h1 class="font-display-tight text-[10vw] md:text-[6vw] leading-[0.9] text-ink mb-6 max-w-4xl" data-reveal>
+        268 pagine.<br>30.000+ <span class="underline-orange">articoli</span>.
+      </h1>
+      <p class="text-xl text-ink/75 max-w-2xl" data-reveal>
+        Sfogliatelo qui sotto. Quando trovate il vostro prodotto, scriveteci.
+      </p>
+    </div>
+  </header>
+
+  <!-- Publitas iframe embed -->
+  <section class="bg-ink py-8">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="rounded-3xl overflow-hidden" style="position: relative; padding-bottom: 62.5%; height: 0;">
+        <iframe
+          src="https://view.publitas.com/2promo/catalogo-2024/page/1"
+          title="Catalogo 2promo.it 2024"
+          loading="lazy"
+          allowfullscreen
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <CatalogForm />
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,85 @@
+---
+// CatalogForm — email-only form to receive PDF catalog
+---
+<section class="bg-cream py-24 md:py-28">
+  <div class="max-w-3xl mx-auto px-6 text-center">
+    <div class="flex items-center justify-center gap-3 mb-6">
+      <span class="w-8 h-px bg-ink"></span>
+      <span class="eyebrow text-ink/70">vi serve a portata di mano?</span>
+    </div>
+    <h2 class="font-display-tight text-5xl md:text-6xl text-ink leading-[0.95] mb-6">
+      Il PDF, in email.<br>Subito.
+    </h2>
+    <p class="text-lg text-ink/70 mb-10 max-w-xl mx-auto">
+      268 pagine in formato PDF, pronte per essere condivise con il team o stampate. Vi arriva subito.
+    </p>
+    <form
+      id="form-catalogo"
+      action="/api/catalogo"
+      method="POST"
+      class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
+      novalidate
+    >
+      <input
+        type="email"
+        name="email"
+        placeholder="email@azienda.com"
+        required
+        class="flex-1 bg-cream border-2 border-ink/20 rounded-full px-6 py-4 text-ink placeholder:text-ink/40 focus:border-orange focus:outline-none transition"
+      />
+      <button
+        type="submit"
+        class="btn-orange bg-orange text-cream px-7 py-4 text-sm font-bold tracking-wide rounded-full hover:bg-ink transition whitespace-nowrap"
+      >
+        Inviami il PDF →
+      </button>
+    </form>
+    <p class="text-sm text-ink/50 mt-4">Nessuno spam. Solo il PDF + qualche idea utile ogni tanto.</p>
+    <div class="mt-12 pt-12 border-t border-ink/10">
+      <p class="text-ink/70 mb-4">Volete ordinare direttamente?</p>
+      <a
+        href="https://www.2promo.it/"
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2 text-ink font-bold underline underline-offset-4 hover:text-orange transition"
+      >
+        Visita il nostro shop online ↗
+      </a>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function() {
+    var form = document.getElementById('form-catalogo');
+    if (!form) return;
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      var input = form.querySelector('input[type="email"]');
+      if (btn) {
+        btn.textContent = 'Invio…';
+        btn.disabled = true;
+      }
+      try {
+        var data = new FormData(form);
+        var resp = await fetch('/api/catalogo', {
+          method: 'POST',
+          body: data,
+        });
+        if (resp.ok) {
+          if (input) input.value = '';
+          if (btn) { btn.textContent = 'Inviato ✓'; }
+          setTimeout(function() {
+            if (btn) { btn.textContent = 'Inviami il PDF →'; btn.disabled = false; }
+          }, 3000);
+        } else {
+          throw new Error('Errore ' + resp.status);
+        }
+      } catch(err) {
+        if (btn) { btn.textContent = 'Riprova →'; btn.disabled = false; }
+        alert('Qualcosa è andato storto. Riprova o scrivici a info@2promo.it');
+      }
+    });
+  })();
+</script>

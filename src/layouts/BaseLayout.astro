@@ -1,0 +1,204 @@
+---
+import '../styles/global.css';
+import CookieBanner from '../components/CookieBanner.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = '2promo.it — Stampiamo su tutto, per davvero',
+  description = 'Gadget aziendali personalizzati B2B. 30.000+ articoli a catalogo, linea custom edge-to-edge con MOQ da 10 pezzi. Made in Italy dal 2014.',
+  ogImage = '/og-image.png',
+  noindex = false,
+} = Astro.props;
+
+const GA4_ID = import.meta.env.PUBLIC_GA4_ID ?? 'G-9Y48RGQVJD';
+const GADS_ID = import.meta.env.PUBLIC_GOOGLE_ADS_ID ?? 'AW-16941964190';
+const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID ?? '1547004352951203';
+---
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:url" content={Astro.url.href} />
+  <meta property="og:locale" content="it_IT" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href={Astro.url.href} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- ========================================
+       CONSENT MODE v2 — DEVE ESSERE PRIMA di gtag.js
+       ======================================== -->
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+
+  <!-- ========================================
+       GOOGLE TAG — Google Ads come ID PRIMARIO
+       (gotcha: AW come primary, GA4 come secondary)
+       ======================================== -->
+  <script is:inline define:vars={{ GADS_ID, GA4_ID }}>
+    var _gads = GADS_ID;
+    var _ga4  = GA4_ID;
+  </script>
+  <script async is:inline src="https://www.googletagmanager.com/gtag/js?id=AW-16941964190"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16941964190');
+    gtag('config', 'G-9Y48RGQVJD');
+  </script>
+
+  <!-- GSAP + ScrollTrigger (from CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" is:inline></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" is:inline></script>
+</head>
+<body class="font-body antialiased">
+
+  <slot />
+
+  <CookieBanner metaPixelId={META_PIXEL_ID} />
+
+  <!-- Sticky CTA Mobile -->
+  <a
+    href="#preventivo"
+    id="sticky-cta"
+    class="md:hidden fixed bottom-4 left-4 right-4 bg-orange text-cream text-center py-4 px-6 rounded-full font-bold tracking-wide shadow-xl shadow-orange/30 z-30 transition-all duration-300"
+    style="text-decoration:none;"
+  >
+    Richiedi Preventivo →
+  </a>
+
+  <!-- GSAP Reveal + Kinetic + Nav shrink + Counters + Sticky CTA observer -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // ===== NAV SHRINK =====
+      const nav = document.getElementById('nav');
+      if (nav) {
+        const observer = new IntersectionObserver(
+          ([e]) => nav.classList.toggle('nav-shrunk', !e.isIntersecting),
+          { threshold: 0 }
+        );
+        const firstSection = document.querySelector('header, section');
+        if (firstSection) observer.observe(firstSection);
+      }
+
+      // ===== GSAP REVEAL =====
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('[data-reveal]').forEach(function(el) {
+          gsap.fromTo(el,
+            { opacity: 0, y: 24 },
+            {
+              opacity: 1, y: 0,
+              duration: 0.7,
+              ease: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
+              scrollTrigger: {
+                trigger: el,
+                start: 'top 88%',
+                once: true
+              }
+            }
+          );
+        });
+      }
+
+      // ===== KINETIC TEXT =====
+      const words = ['tutto', 'davvero tutto', 'qualunque cosa', 'ovunque', 'proprio tutto'];
+      const kinetic = document.getElementById('kinetic-word');
+      if (kinetic) {
+        let i = 0;
+        setInterval(function() {
+          i = (i + 1) % words.length;
+          if (typeof gsap !== 'undefined') {
+            gsap.to(kinetic, {
+              opacity: 0, y: -8, duration: 0.2,
+              onComplete: function() {
+                kinetic.textContent = words[i];
+                gsap.to(kinetic, { opacity: 1, y: 0, duration: 0.3, ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)' });
+              }
+            });
+          } else {
+            kinetic.textContent = words[i];
+          }
+        }, 2400);
+      }
+
+      // ===== COUNTERS =====
+      function animateCounter(el, target, duration) {
+        var start = 0;
+        var step = target / (duration / 16);
+        var timer = setInterval(function() {
+          start += step;
+          if (start >= target) { start = target; clearInterval(timer); }
+          el.textContent = Math.floor(start).toLocaleString('it-IT');
+        }, 16);
+      }
+      document.querySelectorAll('.counter').forEach(function(el) {
+        var target = parseInt(el.dataset.target || '0', 10);
+        if (typeof IntersectionObserver !== 'undefined') {
+          var obs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                animateCounter(el, target, 1200);
+                obs.disconnect();
+              }
+            });
+          }, { threshold: 0.5 });
+          obs.observe(el);
+        } else {
+          el.textContent = target.toLocaleString('it-IT');
+        }
+      });
+
+      // ===== STICKY CTA — nasconde quando form è visibile =====
+      var stickyCta = document.getElementById('sticky-cta');
+      var formSection = document.getElementById('preventivo');
+      if (stickyCta && formSection) {
+        var formObs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              stickyCta.style.transform = 'translateY(100px)';
+              stickyCta.style.opacity = '0';
+            } else {
+              stickyCta.style.transform = '';
+              stickyCta.style.opacity = '';
+            }
+          });
+        }, { threshold: 0.1 });
+        formObs.observe(formSection);
+      }
+
+    });
+  </script>
+
+</body>
+</html>

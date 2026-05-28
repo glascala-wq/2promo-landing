@@ -1,0 +1,130 @@
+---
+// ContactForm — preventivo request form
+// ⚠️ NO "24h risposta" — regola brand memory.md 12 mag 2026
+interface Props {
+  preselectLinea?: 'standard' | 'custom' | 'unsure' | '';
+  variant?: 'dark' | 'navy';
+  id?: string;
+}
+const { preselectLinea = '', variant = 'dark', id = 'preventivo' } = Astro.props;
+
+const bgClass = variant === 'navy' ? 'bg-navy' : 'bg-ink';
+---
+
+<section id={id} class={`${bgClass} text-cream py-24 md:py-32 relative overflow-hidden`}>
+  <div class="absolute -bottom-32 -left-20 w-[400px] h-[400px] rounded-full bg-orange/15 blur-3xl pointer-events-none"></div>
+  <div class="max-w-5xl mx-auto px-6 relative">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="w-8 h-px bg-orange"></span>
+      <span class="eyebrow text-orange">
+        {preselectLinea === 'custom' ? 'avete in mente qualcosa di particolare?' : 'pronti a partire?'}
+      </span>
+    </div>
+    <h2 class="font-display-tight text-5xl md:text-7xl leading-[0.95] mb-6 max-w-3xl">
+      {preselectLinea === 'custom' ? 'Raccontatelo qui.' : 'Raccontateci<br>cosa vi serve.'}
+    </h2>
+    <p class="text-xl text-cream/80 mb-12 max-w-2xl">
+      Bozza visiva gratuita. Senza impegno. <span class="text-orange font-bold">Senza costi.</span>
+    </p>
+    <form
+      id="form-preventivo"
+      action="/api/lead"
+      method="POST"
+      class="grid grid-cols-1 md:grid-cols-2 gap-5"
+      novalidate
+    >
+      <input
+        type="text"
+        name="nome"
+        placeholder="Nome e Cognome*"
+        required
+        class="bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream placeholder:text-cream/40 focus:border-orange focus:outline-none transition"
+      />
+      <input
+        type="text"
+        name="azienda"
+        placeholder="Azienda (opzionale)"
+        class="bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream placeholder:text-cream/40 focus:border-orange focus:outline-none transition"
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email aziendale*"
+        required
+        class="bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream placeholder:text-cream/40 focus:border-orange focus:outline-none transition"
+      />
+      <input
+        type="tel"
+        name="telefono"
+        placeholder="Telefono*"
+        required
+        class="bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream placeholder:text-cream/40 focus:border-orange focus:outline-none transition"
+      />
+      <select
+        name="linea"
+        class={`md:col-span-2 border-2 rounded-xl px-5 py-4 text-cream focus:border-orange focus:outline-none transition ${preselectLinea === 'custom' ? 'bg-orange/15 border-orange' : 'bg-cream/5 border-cream/20'}`}
+      >
+        <option value="" class="text-ink" selected={preselectLinea === ''}>Quale linea vi interessa? (opzionale)</option>
+        <option value="standard" class="text-ink" selected={preselectLinea === 'standard'}>Catalogo standard (penne, tazze, t-shirt, USB…)</option>
+        <option value="custom" class="text-ink" selected={preselectLinea === 'custom'}>Linea Custom (Pantone, edge-to-edge, MOQ 10)</option>
+        <option value="unsure" class="text-ink" selected={preselectLinea === 'unsure'}>Non sono sicuro — aiutatemi voi</option>
+      </select>
+      <textarea
+        name="messaggio"
+        rows={preselectLinea === 'custom' ? 5 : 4}
+        placeholder={preselectLinea === 'custom'
+          ? 'Cosa avete in mente?* — descrivete forma, Pantone, materiale, quantità, deadline. Tutto utile.'
+          : 'Cosa dovete realizzare?* — 100 t-shirt? 500 power bank? Tutto è benvenuto.'}
+        required
+        class="md:col-span-2 bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream placeholder:text-cream/40 focus:border-orange focus:outline-none transition"
+      ></textarea>
+      <label class="md:col-span-2 flex items-start gap-3 text-sm text-cream/70">
+        <input type="checkbox" name="privacy" required class="mt-1 accent-orange" />
+        <span>Ho letto e accetto la <a href="/privacy" class="underline hover:text-orange transition">Privacy Policy</a>.</span>
+      </label>
+      <button
+        type="submit"
+        class="btn-orange md:col-span-2 bg-orange text-cream py-5 px-8 text-base font-bold tracking-wide rounded-full hover:bg-cream hover:text-ink transition"
+      >
+        {preselectLinea === 'custom' ? 'Richiedi Bozza Custom →' : 'Richiedi Preventivo e Bozza →'}
+      </button>
+    </form>
+    <p class="text-sm text-cream/50 mt-6">
+      Risposta rapida. Nessun obbligo.<br>
+      P.S. abbassate i toner, sentirete da noi presto.
+    </p>
+  </div>
+</section>
+
+<script is:inline>
+  (function() {
+    var form = document.getElementById('form-preventivo');
+    if (!form) return;
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) {
+        btn.textContent = 'Invio in corso…';
+        btn.disabled = true;
+      }
+      try {
+        var data = new FormData(form);
+        var resp = await fetch('/api/lead', {
+          method: 'POST',
+          body: data,
+        });
+        if (resp.ok) {
+          window.location.href = '/grazie';
+        } else {
+          throw new Error('Errore ' + resp.status);
+        }
+      } catch(err) {
+        if (btn) {
+          btn.textContent = 'Riprova →';
+          btn.disabled = false;
+        }
+        alert('Qualcosa è andato storto. Riprova o scrivici a info@2promo.it');
+      }
+    });
+  })();
+</script>
