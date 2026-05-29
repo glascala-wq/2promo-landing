@@ -4,15 +4,19 @@ import UrgencyBar from '../components/UrgencyBar.astro';
 import Navbar from '../components/Navbar.astro';
 import CatalogForm from '../components/CatalogForm.astro';
 import Footer from '../components/Footer.astro';
+
+const IFRAME_STANDARD = 'https://view.publitas.com/md-it/gifts_ita_without-prices_1/page/1';
+const IFRAME_CUSTOM = 'https://view.publitas.com/md-it/25-1-yourchoice_ita_vr-dakgombypdjg/page/1';
 ---
 
 <BaseLayout
   title="Catalogo 2promo.it — 268 pagine, 30.000+ articoli"
-  description="Sfoglia il catalogo completo 2promo: 268 pagine, 30.000+ articoli personalizzabili. Ricevi il PDF via email o sfoglialo online."
+  description="Sfoglia il nostro catalogo completo: 268 pagine, 30.000+ articoli personalizzabili. Oppure scopri la nostra Linea Custom su misura."
 >
   <UrgencyBar />
   <Navbar activeRoute="catalogo" />
 
+  <!-- Hero compatto -->
   <header class="relative overflow-hidden bg-cream">
     <div class="absolute inset-0 glow-orange pointer-events-none opacity-40"></div>
     <div class="relative max-w-7xl mx-auto px-6 pt-16 pb-12 md:pt-20 md:pb-16">
@@ -24,26 +28,145 @@ import Footer from '../components/Footer.astro';
         268 pagine.<br>30.000+ <span class="underline-orange">articoli</span>.
       </h1>
       <p class="text-xl text-ink/75 max-w-2xl" data-reveal>
-        Sfogliatelo qui sotto. Quando trovate il vostro prodotto, scriveteci.
+        Sfogliateli qui sotto. Quando trovate quello giusto, scriveteci.
       </p>
     </div>
   </header>
 
-  <!-- Publitas iframe embed -->
-  <section class="bg-ink py-8">
+  <!-- Tab switcher + iframe -->
+  <section class="bg-cream pb-20 md:pb-28">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="rounded-3xl overflow-hidden" style="position: relative; padding-bottom: 62.5%; height: 0;">
+
+      <!-- Tab buttons -->
+      <div class="flex gap-2 mb-8 border-b border-ink/10">
+        <button
+          id="tab-standard"
+          data-tab="standard"
+          class="tab-btn px-6 py-3 font-bold border-b-2 border-orange text-ink transition"
+        >
+          Catalogo Standard
+        </button>
+        <button
+          id="tab-custom"
+          data-tab="custom"
+          class="tab-btn px-6 py-3 font-bold border-b-2 border-transparent text-ink/50 hover:text-ink transition"
+        >
+          Linea Custom
+        </button>
+      </div>
+
+      <!-- Dynamic heading -->
+      <div class="mb-8">
+        <h2
+          id="catalog-heading"
+          class="font-display-tight text-3xl md:text-4xl text-ink leading-tight mb-2"
+        >
+          Il nostro catalogo gadget
+        </h2>
+        <p
+          id="catalog-sub"
+          class="text-ink/60 max-w-2xl"
+        >
+          Tutto quello che facciamo stampare ogni giorno. Senza prezzi pubblici — chiedete il preventivo.
+        </p>
+      </div>
+
+      <!-- Iframe Publitas 16:10 contained -->
+      <div
+        class="catalog-frame max-w-6xl mx-auto bg-cream rounded-2xl shadow-2xl overflow-hidden border border-ink/10"
+        style="aspect-ratio: 16/10;"
+      >
         <iframe
-          src="https://view.publitas.com/2promo/catalogo-2024/page/1"
-          title="Catalogo 2promo.it 2024"
+          id="catalog-iframe"
+          src={IFRAME_STANDARD}
+          title="Catalogo 2promo"
+          class="w-full h-full"
           loading="lazy"
-          allowfullscreen
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+          allow="fullscreen"
+          referrerpolicy="no-referrer"
         ></iframe>
       </div>
+
     </div>
   </section>
 
   <CatalogForm />
   <Footer />
 </BaseLayout>
+
+<script is:inline define:vars={{ IFRAME_STANDARD, IFRAME_CUSTOM }}>
+  (function() {
+    var headings = {
+      standard: {
+        h2: 'Il nostro catalogo gadget',
+        sub: 'Tutto quello che facciamo stampare ogni giorno. Senza prezzi pubblici — chiedete il preventivo.'
+      },
+      custom: {
+        h2: 'La nostra Linea Custom',
+        sub: 'Le creazioni con stampa integrale dei nostri progetti su misura. Da ordine minimo 10 pezzi.'
+      }
+    };
+    var iframeSrc = {
+      standard: IFRAME_STANDARD,
+      custom: IFRAME_CUSTOM
+    };
+
+    var tabStd = document.getElementById('tab-standard');
+    var tabCus = document.getElementById('tab-custom');
+    var iframe = document.getElementById('catalog-iframe');
+    var heading = document.getElementById('catalog-heading');
+    var sub = document.getElementById('catalog-sub');
+
+    function setTab(tab) {
+      // Update buttons
+      tabStd.classList.toggle('border-orange', tab === 'standard');
+      tabStd.classList.toggle('text-ink', tab === 'standard');
+      tabStd.classList.toggle('border-transparent', tab !== 'standard');
+      tabStd.classList.toggle('text-ink/50', tab !== 'standard');
+
+      tabCus.classList.toggle('border-orange', tab === 'custom');
+      tabCus.classList.toggle('text-ink', tab === 'custom');
+      tabCus.classList.toggle('border-transparent', tab !== 'custom');
+      tabCus.classList.toggle('text-ink/50', tab !== 'custom');
+
+      // Update heading + sub with fade
+      heading.style.opacity = '0';
+      sub.style.opacity = '0';
+      setTimeout(function() {
+        heading.textContent = headings[tab].h2;
+        sub.textContent = headings[tab].sub;
+        heading.style.transition = 'opacity 0.3s';
+        sub.style.transition = 'opacity 0.3s';
+        heading.style.opacity = '1';
+        sub.style.opacity = '1';
+      }, 150);
+
+      // Update iframe with fade
+      iframe.style.opacity = '0';
+      iframe.style.transition = 'opacity 0.3s';
+      setTimeout(function() {
+        iframe.src = iframeSrc[tab];
+        iframe.style.opacity = '1';
+      }, 300);
+
+      // Update URL without reload
+      var url = new URL(window.location.href);
+      if (tab === 'custom') {
+        url.searchParams.set('linea', 'custom');
+      } else {
+        url.searchParams.delete('linea');
+      }
+      history.replaceState(null, '', url.toString());
+    }
+
+    // Read initial state from URL
+    var params = new URLSearchParams(window.location.search);
+    var initialTab = params.get('linea') === 'custom' ? 'custom' : 'standard';
+    if (initialTab === 'custom') {
+      setTab('custom');
+    }
+
+    tabStd.addEventListener('click', function() { setTab('standard'); });
+    tabCus.addEventListener('click', function() { setTab('custom'); });
+  })();
+</script>

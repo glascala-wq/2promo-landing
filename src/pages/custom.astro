@@ -13,17 +13,17 @@ import Footer from '../components/Footer.astro';
 
 const faqCustom = [
   {
-    q: 'Davvero MOQ da 10 pezzi?',
-    a: 'Davvero. Su abbigliamento custom (t-shirt, polo, felpe) partiamo da 10 pezzi. Su altre famiglie i MOQ variano: borse 100, lanyards 100, calzini 50. Sotto i 10 pezzi non riusciamo, ma una pre-serie da 10 sì.',
+    q: 'Davvero ordine minimo da 10 pezzi?',
+    a: 'Davvero. Su abbigliamento custom (t-shirt, polo, felpe) partiamo da 10 pezzi. Su altre famiglie gli ordini minimi variano: borse 100, cordini eventi 100, calzini 50. Sotto i 10 pezzi non riusciamo, ma una pre-serie da 10 sì.',
     open: true,
   },
   {
     q: 'Cosa intendete con Pantone esatto?',
-    a: 'Riproduciamo il vostro colore <strong class="text-ink">esattamente</strong> come da codice Pantone, su tessuto o materiale custom. Senza "rosa che diventa salmone in stampa" o "blu che vira sul viola".',
+    a: 'Riproduciamo il vostro colore <strong class="text-ink">esattamente</strong> come da codice Pantone, su tessuto o materiale personalizzato. Senza "rosa che diventa salmone in stampa" o "blu che vira sul viola".',
   },
   {
-    q: 'Edge-to-edge si applica a tutto?',
-    a: 'Dipende dal materiale e dalla tecnica. Su tessuti sintetici (RPET, poliestere) sì, full-surface. Su cotone naturale e altri materiali ci sono limiti tecnici fisici. Nella bozza vi diciamo cosa è fattibile.',
+    q: 'La stampa su tutta la superficie si applica a tutto?',
+    a: 'Dipende dal materiale e dalla tecnica. Su tessuti sintetici (RPET, poliestere) sì, stampa su tutta la superficie. Su cotone naturale e altri materiali ci sono limiti tecnici fisici. Nella bozza vi diciamo cosa è fattibile.',
   },
   {
     q: 'Posso vedere prototipi fisici prima di tutta la produzione?',
@@ -33,8 +33,8 @@ const faqCustom = [
 ---
 
 <BaseLayout
-  title="Linea Custom — 2promo.it · Pantone esatto, edge-to-edge, MOQ da 10"
-  description="Stampa custom edge-to-edge, Pantone esatti, MOQ da 10 pezzi. T-shirt, borse, lanyards, calzini su misura per il vostro brand. Made in Italy dal 2014."
+  title="Linea Custom — 2promo.it · Pantone esatto, stampa su misura, da 10 pezzi"
+  description="Stampa custom su tutta la superficie, Pantone esatti, ordine minimo da 10 pezzi. T-shirt, borse, cordini eventi, calzini su misura per il vostro brand."
 >
   <UrgencyBar />
   <Navbar activeRoute="custom" />
@@ -58,8 +58,8 @@ const faqCustom = [
         </div>
         <div class="bg-ink text-cream rounded-3xl p-8" data-reveal>
           <div class="font-display-tight text-orange text-5xl mb-4">03</div>
-          <h3 class="font-display-tight text-3xl mb-3">MOQ da 10 pezzi</h3>
-          <p class="text-cream/70 leading-relaxed">Anche per piccoli eventi, regali corporate, pre-serie. Da 10 pezzi in su, senza che vi dicano "eh ma sotto i 100 non si fa".</p>
+          <h3 class="font-display-tight text-3xl mb-3">Da 10 pezzi in su</h3>
+          <p class="text-cream/70 leading-relaxed">L'ordine minimo parte da 10 pezzi su misura. Anche per piccoli eventi, regali corporate, pre-serie e test pilota. Senza che vi dicano "eh ma sotto i 100 non si fa".</p>
         </div>
       </div>
       <p class="text-center text-ink/60 mt-10 max-w-3xl mx-auto">
@@ -89,7 +89,7 @@ const faqCustom = [
           <span class="eyebrow text-cream/80">abbigliamento</span>
           <div>
             <h3 class="font-display-tight text-4xl md:text-5xl leading-tight">T-shirt, polo, felpe.<br>Da <span class="underline-orange">10 pezzi</span>.</h3>
-            <p class="cat-tag mt-3 text-sm font-bold">Stampa edge-to-edge · Pantone matching</p>
+            <p class="cat-tag mt-3 text-sm font-bold">Stampa su tutta la superficie · Colore esatto come da pantoniera</p>
           </div>
         </a>
         <a
@@ -100,8 +100,8 @@ const faqCustom = [
         >
           <span class="eyebrow text-orange">borse cotone</span>
           <div>
-            <h3 class="font-display-tight text-4xl md:text-5xl leading-tight">Shopper full-print.<br>Da <span class="text-orange">100 pezzi</span>.</h3>
-            <p class="cat-tag mt-3 text-sm font-bold">Stampa edge-to-edge · forme custom</p>
+            <h3 class="font-display-tight text-4xl md:text-5xl leading-tight">Shopper integrali.<br>Da <span class="text-orange">100 pezzi</span>.</h3>
+            <p class="cat-tag mt-3 text-sm font-bold">Stampa su tutta la superficie · forme personalizzate</p>
           </div>
         </a>
         <a
@@ -125,7 +125,7 @@ const faqCustom = [
           <span class="eyebrow text-ink/60">calzini</span>
           <div>
             <h3 class="font-display-tight text-4xl md:text-5xl leading-tight">Calzini custom.<br>Da <span class="underline-orange">50 pezzi</span>.</h3>
-            <p class="cat-tag mt-3 text-sm font-bold">Tessitura full-jacquard · 100% custom</p>
+            <p class="cat-tag mt-3 text-sm font-bold">Tessitura full-jacquard · 100% personalizzati</p>
           </div>
         </a>
       </div>
@@ -145,23 +145,23 @@ const faqCustom = [
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="border border-cream/20 rounded-2xl p-8">
-          <div class="eyebrow text-cream/60 mb-3">linea standard</div>
+          <div class="eyebrow text-cream/60 mb-3">il nostro catalogo</div>
           <h3 class="font-display-tight text-3xl mb-4">Catalogo 30.000+</h3>
           <ul class="space-y-2 text-cream/80">
-            <li>· MOQ da 50 pezzi</li>
+            <li>· Da 1 pezzo campione (extra)</li>
             <li>· Stampa sulla zona prevista</li>
-            <li>· Colori da pantoniera Midocean</li>
-            <li>· Consegna 7 giorni</li>
+            <li>· Colori da nostra pantoniera</li>
+            <li>· Consegna 3 giorni</li>
             <li>· Bozza visiva inclusa</li>
           </ul>
         </div>
         <div class="border-2 border-orange rounded-2xl p-8 bg-orange/5">
-          <div class="eyebrow text-orange mb-3">linea custom</div>
-          <h3 class="font-display-tight text-3xl mb-4">Su misura, da 10 pz</h3>
+          <div class="eyebrow text-orange mb-3">su misura, dal nostro studio</div>
+          <h3 class="font-display-tight text-3xl mb-4">Su misura, da 10 pezzi</h3>
           <ul class="space-y-2 text-cream/90">
-            <li>· <strong>MOQ da 10 pezzi</strong> su abbigliamento</li>
-            <li>· <strong>Stampa edge-to-edge</strong>, tutta la superficie</li>
-            <li>· <strong>Pantone esatti</strong> da pantoniera</li>
+            <li>· <strong>Ordine minimo da 10 pezzi</strong> su abbigliamento</li>
+            <li>· <strong>Stampa su tutta la superficie</strong></li>
+            <li>· <strong>Pantone esatto</strong> da pantoniera</li>
             <li>· Consegna 12-15 giorni</li>
             <li>· Bozza visiva inclusa</li>
           </ul>
