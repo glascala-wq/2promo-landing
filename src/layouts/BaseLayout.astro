@@ -67,13 +67,31 @@ const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID ?? '1547004352951203'
     var _gads = GADS_ID;
     var _ga4  = GA4_ID;
   </script>
-  <script async is:inline src="https://www.googletagmanager.com/gtag/js?id=AW-16941964190"></script>
   <script is:inline>
+    // Coda gtag disponibile subito (Consent Mode già impostato sopra)
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'AW-16941964190');
     gtag('config', 'G-9Y48RGQVJD');
+    // Carica lo script gtag (~350KB) dopo il load per non competere con LCP
+    function loadGtag(){
+      if (window.__gtagLoaded) return;
+      window.__gtagLoaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=AW-16941964190';
+      document.head.appendChild(s);
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(loadGtag, 1200);
+    } else {
+      window.addEventListener('load', function(){ setTimeout(loadGtag, 1200); });
+    }
+    // Fallback: carica comunque al primo input se l'utente interagisce subito
+    ['scroll','pointerdown','keydown'].forEach(function(ev){
+      window.addEventListener(ev, loadGtag, { once: true, passive: true });
+    });
   </script>
 
   <!-- GSAP + ScrollTrigger (from CDN) — defer per non bloccare il render -->
