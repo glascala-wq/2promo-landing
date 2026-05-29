@@ -58,6 +58,7 @@
   /* ===== DECORATIVE ===== */
   .glow-orange {
     background: radial-gradient(ellipse at center, rgba(254, 80, 0, 0.18) 0%, rgba(254, 80, 0, 0) 60%);
+    pointer-events: none;
   }
   .underline-orange {
     background-image: linear-gradient(120deg, #FE5000, #FE5000);
@@ -229,4 +230,11 @@
 
 .animate-fade-up {
   animation: fadeUp 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* ===== MOBILE TYPOGRAPHY ADJUST ===== */
+@media (max-width: 768px) {
+  .font-display-tight {
+    letter-spacing: -0.02em;
+  }
 }

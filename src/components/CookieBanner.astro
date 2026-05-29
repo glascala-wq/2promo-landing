@@ -7,19 +7,19 @@ const { metaPixelId = '1547004352951203' } = Astro.props;
 
 <div
   id="cookie-banner"
-  class="fixed bottom-0 left-0 right-0 z-50 bg-ink text-cream p-6 md:p-8 shadow-2xl"
+  class="fixed bottom-0 left-0 right-0 z-50 bg-ink text-cream p-4 md:p-6 shadow-2xl"
   style="display:none;"
 >
-  <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-start md:items-center gap-6">
+  <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-6">
     <div class="flex-1">
-      <p class="text-sm text-cream/90 leading-relaxed">
-        Utilizziamo cookie analitici e di marketing per migliorare la vostra esperienza e personalizzare i contenuti.
-        Accettando, ci permettete di capire come usate il sito e mostrarvi pubblicità rilevante.
-        <a href="/privacy" class="underline hover:text-orange transition">Privacy Policy</a> ·
-        <a href="/cookie" class="underline hover:text-orange transition">Cookie Policy</a>
+      <p class="text-sm md:text-base text-cream/90 leading-relaxed">
+        <span class="md:hidden">Usiamo cookie per analytics e marketing. Decidete voi.</span>
+        <span class="hidden md:inline">Utilizziamo cookie analitici e di marketing per migliorare la vostra esperienza e personalizzare i contenuti. Accettando, ci permettete di capire come usate il sito e mostrarvi pubblicità rilevante.</span>
+        <a href="/privacy" class="underline hover:text-orange transition">Privacy</a> ·
+        <a href="/cookie" class="underline hover:text-orange transition">Cookie</a>
       </p>
     </div>
-    <div class="flex gap-3 flex-shrink-0">
+    <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto flex-shrink-0">
       <button
         id="cookie-reject"
         class="px-5 py-3 text-sm font-bold border-2 border-cream/30 text-cream/70 rounded-full hover:border-cream transition"

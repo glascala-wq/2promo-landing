@@ -6,7 +6,7 @@ const { variant = 'home' } = Astro.props;
 ---
 
 {variant === 'home' ? (
-  <header class="relative overflow-hidden">
+  <header class="relative overflow-hidden isolate">
     <div class="absolute inset-0 glow-orange pointer-events-none"></div>
     <div class="relative max-w-7xl mx-auto px-6 pt-16 pb-24 md:pt-24 md:pb-32">
       <div class="flex items-center gap-3 mb-8" data-reveal>
@@ -28,7 +28,7 @@ const { variant = 'home' } = Astro.props;
       </h2>
       <p class="text-xl md:text-2xl text-ink/75 max-w-2xl mb-12 leading-relaxed" data-reveal>
         Il vostro reparto gadget aziendali. Online.<br>
-        <strong class="text-ink font-bold">30.000+ articoli</strong> pronti per il vostro logo, e se non c'è — lo creiamo.
+        <strong class="text-ink font-bold">30.000+ articoli</strong> pronti per il vostro logo. E se non c'è, lo creiamo.
       </p>
       <div class="flex flex-wrap items-center gap-4 mb-16" data-reveal>
         <a
@@ -52,7 +52,7 @@ const { variant = 'home' } = Astro.props;
     </div>
   </header>
 ) : (
-  <header class="relative overflow-hidden bg-cream">
+  <header class="relative overflow-hidden isolate bg-cream">
     <div class="absolute inset-0 glow-orange pointer-events-none opacity-60"></div>
     <div class="relative max-w-7xl mx-auto px-6 pt-16 pb-20 md:pt-24 md:pb-28">
       <div class="flex items-center gap-3 mb-6" data-reveal>
