@@ -193,6 +193,13 @@
     filter: none;
     opacity: 1;
   }
+  /* Radio Italia ha canvas 194×120 vs 194×194 degli altri → occupa più spazio visivo; riduco l'altezza per pareggiare */
+  .client-logo[alt="Radio Italia"] {
+    height: 42px;
+  }
+  .client-logo-grid[alt="Radio Italia"] {
+    height: 28px;
+  }
 
   /* ===== CERTIFICATION LOGOS ===== */
   .cert-logo {
