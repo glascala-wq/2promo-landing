@@ -52,7 +52,7 @@ const pills = ['tech', 'drinkware', 'eco', 'textile', 'office', 'lifestyle'];
                 <div class="font-display text-lg mb-0.5">{p.name}</div>
                 <div class="text-sm opacity-60">Da 100 pezzi</div>
               </div>
-              <a href="/preventivo" class="absolute inset-0 bg-orange/95 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col items-start justify-end p-6 text-cream" style="text-decoration:none;">
+              <a href="/preventivo" tabindex={set === 1 ? -1 : 0} aria-hidden={set === 1 ? 'true' : 'false'} class="absolute inset-0 bg-orange/95 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col items-start justify-end p-6 text-cream" style="text-decoration:none;">
                 <div class="font-display text-2xl mb-2 leading-tight">{p.name}</div>
                 <div class="text-sm mb-4 opacity-90">{p.cat} · Pantone su richiesta</div>
                 <span class="font-bold underline">Chiedi preventivo →</span>
@@ -79,7 +79,7 @@ const pills = ['tech', 'drinkware', 'eco', 'textile', 'office', 'lifestyle'];
                 <div class="font-display text-lg mb-0.5">{p.name}</div>
                 <div class="text-sm opacity-60">Da 100 pezzi</div>
               </div>
-              <a href="/preventivo" class="absolute inset-0 bg-orange/95 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col items-start justify-end p-6 text-cream" style="text-decoration:none;">
+              <a href="/preventivo" tabindex={set === 1 ? -1 : 0} aria-hidden={set === 1 ? 'true' : 'false'} class="absolute inset-0 bg-orange/95 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col items-start justify-end p-6 text-cream" style="text-decoration:none;">
                 <div class="font-display text-2xl mb-2 leading-tight">{p.name}</div>
                 <div class="text-sm mb-4 opacity-90">{p.cat} · Pantone su richiesta</div>
                 <span class="font-bold underline">Chiedi preventivo →</span>

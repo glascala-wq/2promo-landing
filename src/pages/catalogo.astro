@@ -49,7 +49,7 @@ const IFRAME_CUSTOM = 'https://view.publitas.com/md-it/25-1-yourchoice_ita_vr-da
         <button
           id="tab-custom"
           data-tab="custom"
-          class="tab-btn px-6 py-3 font-bold border-b-2 border-transparent text-ink/50 hover:text-ink transition"
+          class="tab-btn px-6 py-3 font-bold border-b-2 border-transparent text-ink/70 hover:text-ink transition"
         >
           Linea Custom
         </button>
@@ -65,7 +65,7 @@ const IFRAME_CUSTOM = 'https://view.publitas.com/md-it/25-1-yourchoice_ita_vr-da
         </h2>
         <p
           id="catalog-sub"
-          class="text-ink/60 max-w-2xl"
+          class="text-ink/70 max-w-2xl"
         >
           Una selezione delle ultime stagioni. Senza prezzi pubblici — vi mandiamo un preventivo personalizzato dopo il vostro brief.
         </p>
@@ -148,12 +148,12 @@ const IFRAME_CUSTOM = 'https://view.publitas.com/md-it/25-1-yourchoice_ita_vr-da
       tabStd.classList.toggle('border-orange', tab === 'standard');
       tabStd.classList.toggle('text-ink', tab === 'standard');
       tabStd.classList.toggle('border-transparent', tab !== 'standard');
-      tabStd.classList.toggle('text-ink/50', tab !== 'standard');
+      tabStd.classList.toggle('text-ink/70', tab !== 'standard');
 
       tabCus.classList.toggle('border-orange', tab === 'custom');
       tabCus.classList.toggle('text-ink', tab === 'custom');
       tabCus.classList.toggle('border-transparent', tab !== 'custom');
-      tabCus.classList.toggle('text-ink/50', tab !== 'custom');
+      tabCus.classList.toggle('text-ink/70', tab !== 'custom');
 
       // Update heading + sub with fade
       heading.style.opacity = '0';

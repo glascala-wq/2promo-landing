@@ -76,13 +76,16 @@ const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID ?? '1547004352951203'
     gtag('config', 'G-9Y48RGQVJD');
   </script>
 
-  <!-- GSAP + ScrollTrigger (from CDN) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" is:inline></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" is:inline></script>
+  <!-- GSAP + ScrollTrigger (from CDN) — defer per non bloccare il render -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer is:inline></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer is:inline></script>
 </head>
 <body class="font-body antialiased">
 
-  <slot />
+  <main>
+    <slot />
+  </main>
 
   <CookieBanner metaPixelId={META_PIXEL_ID} />
 
