@@ -4,12 +4,20 @@ interface Props {
 }
 const { variant = 'marquee' } = Astro.props;
 
-const clients = [
-  'RED BULL', 'LEONARDO', 'CROCE ROSSA', 'RHEINMETALL', 'PRATO NEVOSO',
-  'BINANCE', 'EDILIZIACROBATICA', 'WONDERBOX', 'RDS', 'AFRY', 'MEDIAWORLD', 'RADIO ITALIA'
+const logos = [
+  { src: '/clients/red-bull.png',             alt: 'Red Bull' },
+  { src: '/clients/binance.png',              alt: 'Binance' },
+  { src: '/clients/wonderbox.png',            alt: 'Wonderbox' },
+  { src: '/clients/mediaworld.png',           alt: 'MediaWorld' },
+  { src: '/clients/monge.png',                alt: 'Monge' },
+  { src: '/clients/rds.png',                  alt: 'RDS' },
+  { src: '/clients/radio-italia.png',         alt: 'Radio Italia' },
+  { src: '/clients/edilizia-acrobatica.png',  alt: 'EdiliziaAcrobatica' },
+  { src: '/clients/prato-nevoso.png',         alt: 'Prato Nevoso' },
+  { src: '/clients/afry.png',                 alt: 'AFRY' },
+  { src: '/clients/sea-milano.png',           alt: 'SEA Milano' },
+  { src: '/clients/capitaneria-di-porto.png', alt: 'Capitaneria di Porto' },
 ];
-
-const highlightedClients = new Set(['CROCE ROSSA', 'EDILIZIACROBATICA', 'MEDIAWORLD']);
 ---
 
 {variant === 'marquee' ? (
@@ -19,15 +27,17 @@ const highlightedClients = new Set(['CROCE ROSSA', 'EDILIZIACROBATICA', 'MEDIAWO
       <span class="eyebrow text-cream/60">si fidano di noi</span>
     </div>
     <div class="relative">
-      <div class="flex gap-16 marquee-track whitespace-nowrap">
-        <div class="flex gap-16 items-center text-3xl font-display tracking-wider opacity-70">
-          {clients.map(c => (
-            <span class={highlightedClients.has(c) ? 'text-orange' : ''}>{c}</span>
+      <div class="flex gap-16 marquee-track items-center">
+        <!-- Set 1 -->
+        <div class="flex gap-16 items-center shrink-0">
+          {logos.map(l => (
+            <img src={l.src} alt={l.alt} class="client-logo" width="140" height="36" />
           ))}
         </div>
-        <div class="flex gap-16 items-center text-3xl font-display tracking-wider opacity-70" aria-hidden="true">
-          {clients.map(c => (
-            <span class={highlightedClients.has(c) ? 'text-orange' : ''}>{c}</span>
+        <!-- Set 2 — duplicate for seamless loop -->
+        <div class="flex gap-16 items-center shrink-0" aria-hidden="true">
+          {logos.map(l => (
+            <img src={l.src} alt="" class="client-logo" width="140" height="36" loading="lazy" />
           ))}
         </div>
       </div>
@@ -40,9 +50,9 @@ const highlightedClients = new Set(['CROCE ROSSA', 'EDILIZIACROBATICA', 'MEDIAWO
         <span class="w-8 h-px bg-ink"></span>
         <span class="eyebrow text-ink/70">si fidano di noi</span>
       </div>
-      <div class="flex flex-wrap gap-x-12 gap-y-6 items-center">
-        {clients.map(c => (
-          <span class={`font-display text-2xl tracking-wider ${highlightedClients.has(c) ? 'text-orange' : 'text-ink/50'}`}>{c}</span>
+      <div class="flex flex-wrap gap-x-12 gap-y-8 items-center">
+        {logos.map(l => (
+          <img src={l.src} alt={l.alt} class="client-logo-grid" width="120" height="40" loading="lazy" />
         ))}
       </div>
     </div>

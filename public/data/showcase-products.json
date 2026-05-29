@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Cappellino baseball",
+    "cat": "lifestyle",
+    "moq": "100 pezzi",
+    "img": "/products/product-2156.jpg"
+  },
+  {
+    "name": "Power bank ecologico",
+    "cat": "tech",
+    "moq": "100 pezzi",
+    "img": "/products/product-2279.jpg"
+  },
+  {
+    "name": "Borraccia inox 500ml",
+    "cat": "drinkware",
+    "moq": "100 pezzi",
+    "img": "/products/product-6451.jpg"
+  },
+  {
+    "name": "T-shirt cotone 180g",
+    "cat": "textile",
+    "moq": "50 pezzi",
+    "img": "/products/product-9963.jpg"
+  }
+]

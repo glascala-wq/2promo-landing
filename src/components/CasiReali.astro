@@ -1,0 +1,54 @@
+---
+// CasiReali — griglia foto lavori reali (senza nomi clienti per privacy commerciale)
+const photos = [
+  { src: '/casestudy/polo-corporate-1.webp',   alt: 'Polo aziendale personalizzata',       eager: true },
+  { src: '/casestudy/borraccia-sport.webp',     alt: 'Borraccia personalizzata',             eager: true },
+  { src: '/casestudy/vetrofania-retail.webp',   alt: 'Vetrofania personalizzata',            eager: true },
+  { src: '/casestudy/felpa-corporate.webp',     alt: 'Felpa corporate stampata',             eager: true },
+  { src: '/casestudy/banner-corporate-1.webp',  alt: 'Banner evento aziendale',              eager: false },
+  { src: '/casestudy/mug-personalizzata.webp',  alt: 'Mug aziendale personalizzata',         eager: false },
+  { src: '/casestudy/divisa-sport.webp',        alt: 'Divisa sportiva personalizzata',       eager: false },
+  { src: '/casestudy/sacca-coulisse.webp',      alt: 'Sacca promozionale personalizzata',    eager: false },
+  { src: '/casestudy/cappellino-corporate.webp',alt: 'Cappellino promozionale',              eager: false },
+  { src: '/casestudy/banner-festival.webp',     alt: 'Banner festival',                      eager: false },
+  { src: '/casestudy/totem-eventi.webp',        alt: 'Totem espositivo brandizzato',         eager: false },
+  { src: '/casestudy/borraccia-sport-2.webp',   alt: 'Borraccia branded',                    eager: false },
+];
+---
+
+<section id="casi-reali" class="bg-cream py-20 md:py-24 border-t border-ink/10">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-center gap-3 mb-6" data-reveal>
+      <span class="w-8 h-px bg-ink"></span>
+      <span class="eyebrow text-ink/70">— lavori veri</span>
+    </div>
+    <div class="flex items-end justify-between flex-wrap gap-6 mb-10" data-reveal>
+      <h2 class="font-display-tight text-5xl md:text-7xl text-ink leading-[0.9]">
+        Cosa abbiamo<br>stampato di recente.
+      </h2>
+      <p class="text-ink/70 text-lg max-w-md">
+        Alcuni esempi di lavori finiti. Prodotti veri con stampe vere.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+      {photos.map((p, i) => (
+        <figure class="overflow-hidden rounded-2xl bg-ink/5 aspect-square m-0">
+          <img
+            src={p.src}
+            alt={p.alt}
+            loading={p.eager ? 'eager' : 'lazy'}
+            class="w-full h-full object-cover hover:scale-105 transition duration-500"
+            width="400"
+            height="400"
+          />
+        </figure>
+      ))}
+    </div>
+
+    <p class="text-center mt-10 text-ink/50 text-sm">
+      Per privacy commerciale non mostriamo i nomi dei clienti.
+      <a href="#preventivo" class="text-orange font-bold hover:underline ml-1">Chiedeteci una proposta →</a>
+    </p>
+  </div>
+</section>

@@ -1,5 +1,20 @@
 ---
-// Showcase — horizontal marquee of bestseller product cards
+// Showcase — bestseller marquee con foto reali prodotto
+// Immagini via API Midocean (build-time fetch)
+
+const products = [
+  { img: '/products/product-9963.jpg', name: 'T-shirt cotone 180g',    cat: 'textile',   moq: 'Da 50 pezzi', hasImg: true },
+  { img: '/products/product-6451.jpg', name: 'Borraccia inox 500ml',   cat: 'drinkware', moq: 'Da 100 pezzi', hasImg: true },
+  { img: '/products/product-2279.jpg', name: 'Power bank ecologico',   cat: 'tech',      moq: 'Da 100 pezzi', hasImg: true },
+  { img: '/products/product-2156.jpg', name: 'Cappellino baseball',    cat: 'lifestyle', moq: 'Da 100 pezzi', hasImg: true },
+  { img: null,                         name: 'Zaino tech 15"',          cat: 'lifestyle', moq: 'Da 50 pezzi',  hasImg: false },
+  { img: null,                         name: 'Tazza ceramica 350ml',   cat: 'drinkware', moq: 'Da 100 pezzi', hasImg: false },
+];
+
+const gradients = [
+  'background: linear-gradient(135deg, #1C1F2A 0%, #292929 100%)',
+  'background: linear-gradient(135deg, #FE5000 0%, #c63f00 100%)',
+];
 ---
 
 <section class="bg-cream py-16 overflow-hidden border-y border-ink/10">
@@ -9,59 +24,34 @@
   </div>
   <div class="relative">
     <div class="flex gap-6 marquee-track-fast whitespace-nowrap">
-      <div class="flex gap-6">
-        <div class="bg-orange/10 border border-orange/30 rounded-2xl px-6 py-5 min-w-[260px]">
-          <div class="font-display text-xl text-ink">Power bank 5000 mAh</div>
-          <div class="text-sm text-ink/60 mt-1">tech · 3.40€/pz · MOQ 100</div>
+      {[0, 1].map(set => (
+        <div class={`flex gap-6${set === 1 ? '' : ''}`} aria-hidden={set === 1 ? 'true' : 'false'}>
+          {products.map((p, i) => (
+            <div class="showcase-card bg-cream rounded-2xl overflow-hidden border border-ink/10 hover:shadow-2xl transition min-w-[260px]">
+              <div class="overflow-hidden bg-cream" style="aspect-ratio:1/1;">
+                {p.hasImg ? (
+                  <img
+                    src={p.img!}
+                    alt={p.name}
+                    class="w-full h-full object-cover hover:scale-105 transition duration-500"
+                    loading={set === 0 && i < 2 ? 'eager' : 'lazy'}
+                    width="260"
+                    height="260"
+                  />
+                ) : (
+                  <div class="w-full h-full flex items-end p-5 text-cream" style={gradients[i % 2]}>
+                    <span class="font-display text-lg leading-tight">{p.name}</span>
+                  </div>
+                )}
+              </div>
+              <div class="p-4">
+                <div class="font-display text-base text-ink mb-0.5">{p.name}</div>
+                <div class="text-sm text-ink/50">{p.cat} · {p.moq}</div>
+              </div>
+            </div>
+          ))}
         </div>
-        <div class="bg-navy text-cream rounded-2xl px-6 py-5 min-w-[260px]">
-          <div class="font-display text-xl">T-shirt cotone 180g</div>
-          <div class="text-sm opacity-70 mt-1">textile · 1.90€/pz · MOQ 50</div>
-        </div>
-        <div class="bg-cream border-2 border-ink/15 rounded-2xl px-6 py-5 min-w-[260px]">
-          <div class="font-display text-xl text-ink">Borraccia inox 500ml</div>
-          <div class="text-sm text-ink/60 mt-1">drinkware · 4.10€/pz · MOQ 100</div>
-        </div>
-        <div class="bg-orange-pale rounded-2xl px-6 py-5 min-w-[260px]">
-          <div class="font-display text-xl text-ink">Tazza ceramica 350ml</div>
-          <div class="text-sm text-ink/60 mt-1">drinkware · 1.20€/pz · MOQ 100</div>
-        </div>
-        <div class="bg-ink text-cream rounded-2xl px-6 py-5 min-w-[260px]">
-          <div class="font-display text-xl">Zaino tech 15"</div>
-          <div class="text-sm opacity-70 mt-1">lifestyle · 12.40€/pz · MOQ 50</div>
-        </div>
-        <div class="bg-orange text-cream rounded-2xl px-6 py-5 min-w-[260px]">
-          <div class="font-display text-xl">Cappellino baseball</div>
-          <div class="text-sm opacity-90 mt-1">lifestyle · 2.90€/pz · MOQ 100</div>
-        </div>
-      </div>
-      <!-- Duplicate for seamless loop -->
-      <div class="flex gap-6" aria-hidden="true">
-        <div class="bg-orange/10 border border-orange/30 rounded-2xl px-6 py-5 min-w-[260px]">
-          <div class="font-display text-xl text-ink">Power bank 5000 mAh</div>
-          <div class="text-sm text-ink/60 mt-1">tech · 3.40€/pz · MOQ 100</div>
-        </div>
-        <div class="bg-navy text-cream rounded-2xl px-6 py-5 min-w-[260px]">
-          <div class="font-display text-xl">T-shirt cotone 180g</div>
-          <div class="text-sm opacity-70 mt-1">textile · 1.90€/pz · MOQ 50</div>
-        </div>
-        <div class="bg-cream border-2 border-ink/15 rounded-2xl px-6 py-5 min-w-[260px]">
-          <div class="font-display text-xl text-ink">Borraccia inox 500ml</div>
-          <div class="text-sm text-ink/60 mt-1">drinkware · 4.10€/pz · MOQ 100</div>
-        </div>
-        <div class="bg-orange-pale rounded-2xl px-6 py-5 min-w-[260px]">
-          <div class="font-display text-xl text-ink">Tazza ceramica 350ml</div>
-          <div class="text-sm text-ink/60 mt-1">drinkware · 1.20€/pz · MOQ 100</div>
-        </div>
-        <div class="bg-ink text-cream rounded-2xl px-6 py-5 min-w-[260px]">
-          <div class="font-display text-xl">Zaino tech 15"</div>
-          <div class="text-sm opacity-70 mt-1">lifestyle · 12.40€/pz · MOQ 50</div>
-        </div>
-        <div class="bg-orange text-cream rounded-2xl px-6 py-5 min-w-[260px]">
-          <div class="font-display text-xl">Cappellino baseball</div>
-          <div class="text-sm opacity-90 mt-1">lifestyle · 2.90€/pz · MOQ 100</div>
-        </div>
-      </div>
+      ))}
     </div>
   </div>
 </section>
