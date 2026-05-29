@@ -1,0 +1,50 @@
+---
+// WhyCustom — 3 card con foto + testo che spiegano la differenza della linea custom
+const cards = [
+  {
+    title: 'Forme personalizzate',
+    desc: 'Non siamo vincolati a nessun catalogo. Disegniamo la forma del gadget partendo dalla vostra idea. Sagomata, fustellata, con fori, rilievi — quello che serve al vostro brand.',
+    img: '/images/customshapes.png',
+  },
+  {
+    title: 'Stampa edge-to-edge',
+    desc: 'Niente bordi bianchi, niente compromessi. Stampa che copre tutta la superficie fino al bordo. Il vostro brand occupa ogni millimetro disponibile.',
+    img: '/images/edgetoedge.png',
+  },
+  {
+    title: 'Colori senza limiti',
+    desc: 'Pantone, CMYK, sfumature, fotografie ad alta risoluzione. Nessun limite al numero di colori o alla complessità della grafica. La pantoniera è vostra.',
+    img: '/images/unlimited_coloursnewbackgroundorangebag.png',
+  },
+];
+---
+
+<section class="bg-cream py-20 md:py-28">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-center gap-3 mb-6" data-reveal>
+      <span class="w-8 h-px bg-ink"></span>
+      <span class="eyebrow text-ink/70">perché la linea custom</span>
+    </div>
+    <h2 class="font-display-tight text-5xl md:text-7xl text-ink leading-[0.95] mb-14 max-w-3xl" data-reveal>
+      Il solito gadget triste?<br><span class="text-orange">No, grazie</span>.
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {cards.map((card, i) => (
+        <div class="rounded-3xl overflow-hidden bg-white border border-ink/8 hover:border-orange/40 transition-colors" data-reveal>
+          <div class="aspect-video overflow-hidden">
+            <img
+              src={card.img}
+              alt={card.title}
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-7">
+            <h3 class="font-display-tight text-2xl text-ink mb-3">{card.title}</h3>
+            <p class="text-ink/65 leading-relaxed text-sm">{card.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

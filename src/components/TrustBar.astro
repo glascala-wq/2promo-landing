@@ -1,0 +1,49 @@
+---
+// TrustBar — 6 badge di fiducia, usato nella sezione /custom
+const badges = [
+  {
+    title: 'Full-Custom',
+    desc: 'Creato da zero per voi',
+    svg: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="7" width="26" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 12h26" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="20" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M14.5 20l1 1 2-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  },
+  {
+    title: 'Da 10 pezzi',
+    desc: 'Minimi bassissimi',
+    svg: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="10" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6 15h20" stroke="currentColor" stroke-width="1.5"/><path d="M12 10V7h8v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><text x="16" y="25" text-anchor="middle" fill="currentColor" font-size="8" font-weight="700">10</text></svg>`,
+  },
+  {
+    title: 'Pantone esatto',
+    desc: 'Massima fedeltà cromatica',
+    svg: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="7" stroke="currentColor" stroke-width="1" opacity="0.5"/><circle cx="16" cy="16" r="3" fill="currentColor"/><line x1="16" y1="2" x2="16" y2="5" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="27" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="16" x2="5" y2="16" stroke="currentColor" stroke-width="1.5"/><line x1="27" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/></svg>`,
+  },
+  {
+    title: 'Edge-to-edge',
+    desc: 'Stampa senza bordi',
+    svg: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="24" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="4" width="24" height="24" rx="2" fill="currentColor" fill-opacity="0.08"/><rect x="6" y="6" width="20" height="20" rx="1" stroke="currentColor" stroke-width="1" stroke-dasharray="3 2"/></svg>`,
+  },
+  {
+    title: 'Eco-Friendly',
+    desc: 'Materiali certificati',
+    svg: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 5c-3 3-9 8-9 14a9 9 0 0018 0c0-6-6-11-9-14z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M16 15v9M13 20l3-3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  },
+  {
+    title: 'Approvi la bozza',
+    desc: 'Prima della stampa',
+    svg: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="3" width="22" height="26" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M10 13h12M10 17h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="23" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M14.5 23l1 1 2-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  },
+];
+---
+
+<section class="bg-cream border-y border-ink/10 py-10">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+      {badges.map((b) => (
+        <div class="flex flex-col items-center text-center text-ink">
+          <div class="w-9 h-9 mb-3 text-orange" set:html={b.svg} />
+          <p class="font-bold text-sm">{b.title}</p>
+          <p class="text-xs text-ink/50 mt-1">{b.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

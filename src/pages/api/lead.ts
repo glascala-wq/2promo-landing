@@ -35,7 +35,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const azienda = (formData.get('azienda') as string | null)?.trim() ?? '';
   const email = (formData.get('email') as string | null)?.trim() ?? '';
   const telefono = (formData.get('telefono') as string | null)?.trim() ?? '';
-  const linea = (formData.get('linea') as string | null)?.trim() ?? '';
   const messaggio = (formData.get('messaggio') as string | null)?.trim() ?? '';
 
   // Validazione base
@@ -58,8 +57,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     attributes: {
       TELEFONO: telefono,
       AZIENDA: azienda || undefined,
-      LINEA_INTERESSE: linea || 'non specificato',
-      MESSAGGIO: messaggio,
+      NOTES: messaggio,
       FONTE: '2promo-landing',
     },
     listIds: [BREVO_LIST_ID_PREVENTIVO],
@@ -93,7 +91,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
       <p><strong>Azienda:</strong> ${azienda || '—'}</p>
       <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
       <p><strong>Telefono:</strong> ${telefono}</p>
-      <p><strong>Linea:</strong> ${linea || '—'}</p>
       <hr/>
       <p><strong>Messaggio:</strong></p>
       <blockquote style="border-left:3px solid #FE5000;padding-left:12px;color:#555;">${messaggio.replace(/\n/g, '<br>')}</blockquote>

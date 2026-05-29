@@ -18,7 +18,7 @@ const { variant = 'home' } = Astro.props;
       </h1>
       <h2 class="font-display-tight text-[7vw] md:text-[4.5vw] leading-[0.95] text-ink/85 mb-10 max-w-5xl" data-reveal>
         Stampiamo su
-        <span class="relative inline-block kinetic-word" id="kinetic">
+        <span class="relative inline-block kinetic-word" id="kinetic" style="min-width: 7ch; text-align: center;">
           <span id="kinetic-word">tutto</span>
           <svg class="absolute -bottom-2 left-0 w-full" height="14" viewBox="0 0 400 14" preserveAspectRatio="none" aria-hidden="true">
             <path class="scribble" d="M5 9 Q 100 1 200 8 T 395 6"/>
@@ -37,13 +37,6 @@ const { variant = 'home' } = Astro.props;
           style="text-decoration:none;"
         >
           Richiedi Preventivo →
-        </a>
-        <a
-          href="/catalogo"
-          class="border-2 border-ink text-ink px-8 py-5 text-base font-bold tracking-wide rounded-full hover:bg-ink hover:text-cream transition"
-          style="text-decoration:none;"
-        >
-          Sfoglia il catalogo
         </a>
         <span class="pill-rotate ml-0 md:ml-6 mt-4 md:mt-0 inline-block bg-cream border-2 border-dashed border-ink/40 text-ink/80 px-5 py-3 text-sm font-bold rounded-full">
           P.S. se non si stampa, ti paghiamo da bere

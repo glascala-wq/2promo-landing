@@ -20,9 +20,7 @@ const bgClass = variant === 'navy' ? 'bg-navy' : 'bg-ink';
         {preselectLinea === 'custom' ? 'avete in mente qualcosa di particolare?' : 'pronti a partire?'}
       </span>
     </div>
-    <h2 class="font-display-tight text-5xl md:text-7xl leading-[0.95] mb-6 max-w-3xl">
-      {preselectLinea === 'custom' ? 'Raccontatelo qui.' : 'Raccontateci<br>cosa vi serve.'}
-    </h2>
+    <h2 class="font-display-tight text-5xl md:text-7xl leading-[0.95] mb-6 max-w-3xl" set:html={preselectLinea === 'custom' ? 'Raccontatelo qui.' : 'Raccontateci<br>cosa vi serve.'}></h2>
     <p class="text-xl text-cream/80 mb-12 max-w-2xl">
       Bozza visiva gratuita. Senza impegno. <span class="text-orange font-bold">Senza costi.</span>
     </p>
@@ -60,15 +58,6 @@ const bgClass = variant === 'navy' ? 'bg-navy' : 'bg-ink';
         required
         class="bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream placeholder:text-cream/40 focus:border-orange focus:outline-none transition"
       />
-      <select
-        name="linea"
-        class={`md:col-span-2 border-2 rounded-xl px-5 py-4 text-cream focus:border-orange focus:outline-none transition ${preselectLinea === 'custom' ? 'bg-orange/15 border-orange' : 'bg-cream/5 border-cream/20'}`}
-      >
-        <option value="" class="text-ink" selected={preselectLinea === ''}>Quale linea vi interessa? (opzionale)</option>
-        <option value="standard" class="text-ink" selected={preselectLinea === 'standard'}>Catalogo standard (penne, tazze, t-shirt, USB…)</option>
-        <option value="custom" class="text-ink" selected={preselectLinea === 'custom'}>Linea Custom (Pantone, edge-to-edge, MOQ 10)</option>
-        <option value="unsure" class="text-ink" selected={preselectLinea === 'unsure'}>Non sono sicuro — aiutatemi voi</option>
-      </select>
       <textarea
         name="messaggio"
         rows={preselectLinea === 'custom' ? 5 : 4}
@@ -90,8 +79,7 @@ const bgClass = variant === 'navy' ? 'bg-navy' : 'bg-ink';
       </button>
     </form>
     <p class="text-sm text-cream/50 mt-6">
-      Risposta rapida. Nessun obbligo.<br>
-      P.S. abbassate i toner, sentirete da noi presto.
+      Rispondiamo in 24h lavorative. Nessun obbligo di acquisto.
     </p>
   </div>
 </section>

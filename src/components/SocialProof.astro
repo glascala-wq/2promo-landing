@@ -1,0 +1,32 @@
+---
+// SocialProof — strip loghi clienti
+// Usato nella sezione /custom
+const logos = [
+  { src: '/images/logos/prato-nevoso.png',   alt: 'Prato Nevoso',         width: 'w-32 md:w-40' },
+  { src: '/images/logos/acrobatica.webp',     alt: 'Acrobatica',           width: 'w-24 md:w-32' },
+  { src: '/images/logos/comune-genova.webp',  alt: 'Comune di Genova',     width: 'w-12 md:w-14' },
+  { src: '/images/logos/mediaworld.webp',     alt: 'MediaWorld',           width: 'w-24 md:w-32' },
+  { src: '/images/logos/radio-italia.webp',   alt: 'Radio Italia',         width: 'w-16 md:w-20' },
+  { src: '/images/logos/binance.webp',        alt: 'Binance',              width: 'w-24 md:w-32' },
+  { src: '/images/logos/pikyrent.webp',       alt: 'Pikyrent',             width: 'w-24 md:w-32' },
+  { src: '/images/logos/sea-super-eroi.webp', alt: 'Super Eroi Acrobatici',width: 'w-24 md:w-32' },
+];
+---
+
+<section class="bg-cream border-t border-ink/10 py-10">
+  <div class="max-w-7xl mx-auto px-6">
+    <p class="eyebrow text-ink/40 text-center mb-8">— già ci hanno scelto</p>
+    <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+      {logos.map((logo) => (
+        <div class={`${logo.width} flex items-center justify-center`}>
+          <img
+            src={logo.src}
+            alt={logo.alt}
+            class="w-full h-auto object-contain opacity-30 hover:opacity-70 transition-opacity duration-300"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -6,8 +6,8 @@ const { activeRoute = 'home' } = Astro.props;
 ---
 <nav id="nav" class="sticky top-0 z-40 transition-all duration-300 bg-cream/60">
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
-    <a href="/" class="font-display text-2xl text-ink leading-none" style="text-decoration:none;">
-      2promo<span class="text-orange">.</span>it
+    <a href="/" style="text-decoration:none;">
+      <img src="/brand/logo.png" alt="2promo.it" class="h-8 md:h-10 w-auto" />
     </a>
     <div class="hidden md:flex items-center gap-7 text-sm font-bold">
       <a href="/" class={`nav-link hover:text-orange transition ${activeRoute === 'home' ? 'active' : ''}`}>Home</a>
@@ -16,7 +16,6 @@ const { activeRoute = 'home' } = Astro.props;
       <a href="#preventivo" class="nav-link hover:text-orange transition">Preventivo</a>
     </div>
     <div class="flex items-center gap-3">
-      <a href="https://www.2promo.it/" target="_blank" rel="noopener" class="shop-pill" title="Shop attuale">Shop</a>
       <a
         href="#preventivo"
         class="btn-orange bg-orange text-cream px-5 py-3 text-sm font-bold tracking-wide rounded-full hover:bg-ink transition hidden sm:inline-block"

@@ -1,7 +1,6 @@
 # 2promo.it — robots.txt
-# Sito in fase di costruzione — noindex temporaneo
 
 User-agent: *
-Disallow: /
+Allow: /
 
-# Revoca noindex prima del go-live (sync S4)
+Sitemap: https://2promo.it/sitemap.xml
