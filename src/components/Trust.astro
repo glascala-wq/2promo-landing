@@ -11,7 +11,7 @@ const logos = [
   { src: '/clients/mediaworld.png',           alt: 'MediaWorld' },
   { src: '/clients/monge.png',                alt: 'Monge' },
   { src: '/clients/rds.png',                  alt: 'RDS' },
-  { src: '/clients/radio-italia.png',         alt: 'Radio Italia' },
+  { src: '/clients/radio-italia.png',         alt: 'Radio Italia', extraClass: 'logo-radio-italia' },
   { src: '/clients/edilizia-acrobatica.png',  alt: 'EdiliziaAcrobatica' },
   { src: '/clients/prato-nevoso.png',         alt: 'Prato Nevoso' },
   { src: '/clients/afry.png',                 alt: 'AFRY' },
@@ -31,13 +31,13 @@ const logos = [
         <!-- Set 1 -->
         <div class="flex gap-16 items-center shrink-0">
           {logos.map(l => (
-            <img src={l.src} alt={l.alt} class="client-logo" width="200" height="60" />
+            <img src={l.src} alt={l.alt} class={`client-logo${l.extraClass ? ' ' + l.extraClass : ''}`} width="200" height="60" />
           ))}
         </div>
         <!-- Set 2 — duplicate for seamless loop -->
         <div class="flex gap-16 items-center shrink-0" aria-hidden="true">
           {logos.map(l => (
-            <img src={l.src} alt="" class="client-logo" width="200" height="60" loading="lazy" />
+            <img src={l.src} alt="" class={`client-logo${l.extraClass ? ' ' + l.extraClass : ''}`} width="200" height="60" loading="lazy" />
           ))}
         </div>
       </div>
@@ -52,7 +52,7 @@ const logos = [
       </div>
       <div class="flex flex-wrap gap-x-12 gap-y-8 items-center">
         {logos.map(l => (
-          <img src={l.src} alt={l.alt} class="client-logo-grid" width="120" height="40" loading="lazy" />
+          <img src={l.src} alt={l.alt} class={`client-logo-grid${l.extraClass ? ' ' + l.extraClass : ''}`} width="120" height="40" loading="lazy" />
         ))}
       </div>
     </div>
