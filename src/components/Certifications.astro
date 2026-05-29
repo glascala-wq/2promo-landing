@@ -26,16 +26,18 @@ const certs = [
     <p class="text-ink/70 text-lg max-w-2xl mb-12" data-reveal>
       RPET, bambù, cotone bio. Lavoriamo solo con materiali certificati e ne forniamo prova su richiesta per ogni articolo del catalogo.
     </p>
-    <div class="grid grid-cols-3 md:grid-cols-5 gap-8 items-center" data-reveal>
+    <div class="grid grid-cols-3 md:grid-cols-5 gap-3 md:gap-4 lg:gap-6" data-reveal>
       {certs.map(c => (
-        <img
-          src={c.src}
-          alt={c.alt}
-          class="cert-logo"
-          width="80"
-          height="80"
-          loading="lazy"
-        />
+        <div class="bg-white rounded-xl p-4 md:p-5 flex items-center justify-center aspect-square shadow-sm">
+          <img
+            src={c.src}
+            alt={c.alt}
+            class="max-h-full max-w-full object-contain filter grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition duration-300"
+            width="80"
+            height="80"
+            loading="lazy"
+          />
+        </div>
       ))}
     </div>
   </div>

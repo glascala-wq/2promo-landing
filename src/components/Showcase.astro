@@ -41,12 +41,12 @@ const pills = ['tech', 'drinkware', 'eco', 'textile', 'office', 'lifestyle'];
   <div class="relative mb-4">
     <div class="flex gap-5 marquee-track-fast">
       {[0, 1].map(set => (
-        <div class="flex gap-5" aria-hidden={set === 1 ? 'true' : 'false'}>
+        <div class="flex gap-5 shrink-0 items-stretch" aria-hidden={set === 1 ? 'true' : 'false'}>
           {row1.map((p, i) => (
-            <div class={`showcase-card relative rounded-3xl overflow-hidden min-w-[280px] ${p.bg}`}>
+            <div class={`showcase-card relative rounded-3xl overflow-hidden min-w-[200px] sm:min-w-[240px] md:min-w-[280px] flex flex-col ${p.bg}`}>
               <div class={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold tracking-wide ${p.pill}`}>{p.cat}</div>
               <div class="overflow-hidden bg-white" style="aspect-ratio:1/1;">
-                <img src={p.img} alt={p.name} class="w-full h-full object-contain p-6" loading={set === 0 && i < 2 ? 'eager' : 'lazy'} width="280" height="280" />
+                <img src={p.img} alt={p.name} class="w-full h-full object-contain p-4 md:p-6" loading={set === 0 && i < 2 ? 'eager' : 'lazy'} width="280" height="280" />
               </div>
               <div class="p-5">
                 <div class="font-display text-lg mb-0.5">{p.name}</div>
@@ -63,12 +63,12 @@ const pills = ['tech', 'drinkware', 'eco', 'textile', 'office', 'lifestyle'];
   <div class="relative">
     <div class="flex gap-5 marquee-track-rev">
       {[0, 1].map(set => (
-        <div class="flex gap-5" aria-hidden={set === 1 ? 'true' : 'false'}>
+        <div class="flex gap-5 shrink-0 items-stretch" aria-hidden={set === 1 ? 'true' : 'false'}>
           {row2.map((p) => (
-            <div class={`showcase-card relative rounded-3xl overflow-hidden min-w-[280px] ${p.bg}`}>
+            <div class={`showcase-card relative rounded-3xl overflow-hidden min-w-[200px] sm:min-w-[240px] md:min-w-[280px] flex flex-col ${p.bg}`}>
               <div class={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold tracking-wide ${p.pill}`}>{p.cat}</div>
               <div class="overflow-hidden bg-white" style="aspect-ratio:1/1;">
-                <img src={p.img} alt={p.name} class="w-full h-full object-contain p-6" loading="lazy" width="280" height="280" />
+                <img src={p.img} alt={p.name} class="w-full h-full object-contain p-4 md:p-6" loading="lazy" width="280" height="280" />
               </div>
               <div class="p-5">
                 <div class="font-display text-lg mb-0.5">{p.name}</div>
