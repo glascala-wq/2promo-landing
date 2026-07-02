@@ -8,6 +8,7 @@ import Footer from '../components/Footer.astro';
 const IFRAME_STANDARD = 'https://view.publitas.com/md-it/gifts_ita_without-prices_1/page/1';
 const IFRAME_CUSTOM = 'https://view.publitas.com/md-it/25-1-yourchoice_ita_vr-dakgombypdjg/page/1';
 const IFRAME_ABBIGLIAMENTO = 'https://catalogue.sologroup-paris.com/solo-group/e-catalogue-it-2026/?page=1';
+const IFRAME_ALLESTIMENTI = '/cataloghi/display-allestimenti-2026.pdf';
 ---
 
 <BaseLayout
@@ -61,6 +62,13 @@ const IFRAME_ABBIGLIAMENTO = 'https://catalogue.sologroup-paris.com/solo-group/e
         >
           Abbigliamento
         </button>
+        <button
+          id="tab-allestimenti"
+          data-tab="allestimenti"
+          class="tab-btn px-6 py-3 font-bold border-b-2 border-transparent text-ink/70 hover:text-ink transition"
+        >
+          Allestimenti
+        </button>
       </div>
 
       <!-- Dynamic heading -->
@@ -93,6 +101,19 @@ const IFRAME_ABBIGLIAMENTO = 'https://catalogue.sologroup-paris.com/solo-group/e
           allow="fullscreen"
           referrerpolicy="no-referrer"
         ></iframe>
+      </div>
+
+      <!-- Apri a tutto schermo (fallback utile, essenziale per il PDF su mobile) -->
+      <div class="max-w-6xl mx-auto mt-4 text-right">
+        <a
+          id="catalog-open"
+          href={IFRAME_STANDARD}
+          target="_blank"
+          rel="noopener"
+          class="text-sm font-bold text-ink/60 hover:text-orange transition"
+        >
+          Apri a tutto schermo ↗
+        </a>
       </div>
 
     </div>
@@ -128,7 +149,7 @@ const IFRAME_ABBIGLIAMENTO = 'https://catalogue.sologroup-paris.com/solo-group/e
   <Footer />
 </BaseLayout>
 
-<script is:inline define:vars={{ IFRAME_STANDARD, IFRAME_CUSTOM, IFRAME_ABBIGLIAMENTO }}>
+<script is:inline define:vars={{ IFRAME_STANDARD, IFRAME_CUSTOM, IFRAME_ABBIGLIAMENTO, IFRAME_ALLESTIMENTI }}>
   (function() {
     var headings = {
       standard: {
@@ -142,19 +163,25 @@ const IFRAME_ABBIGLIAMENTO = 'https://catalogue.sologroup-paris.com/solo-group/e
       abbigliamento: {
         h2: 'Abbigliamento · 308 pagine',
         sub: 'T-shirt, felpe, polo, workwear e accessori pronti da personalizzare col vostro logo. Ricamo o stampa, dai piccoli lotti alle grandi quantità.'
+      },
+      allestimenti: {
+        h2: 'Allestimenti · 142 pagine',
+        sub: 'Soluzioni per la comunicazione visiva: stand fiera, fondali, totem, banchetti, segnaletica, gazebo, bandiere, rollup e banner. Da personalizzare col vostro brand.'
       }
     };
     var iframeSrc = {
       standard: IFRAME_STANDARD,
       custom: IFRAME_CUSTOM,
-      abbigliamento: IFRAME_ABBIGLIAMENTO
+      abbigliamento: IFRAME_ABBIGLIAMENTO,
+      allestimenti: IFRAME_ALLESTIMENTI
     };
-    var validTabs = ['standard', 'custom', 'abbigliamento'];
+    var validTabs = ['standard', 'custom', 'abbigliamento', 'allestimenti'];
 
     var tabButtons = Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
     var iframe = document.getElementById('catalog-iframe');
     var heading = document.getElementById('catalog-heading');
     var sub = document.getElementById('catalog-sub');
+    var openLink = document.getElementById('catalog-open');
 
     function setTab(tab) {
       // Update buttons (attivo = arancio, altri = grigi)
@@ -177,6 +204,9 @@ const IFRAME_ABBIGLIAMENTO = 'https://catalogue.sologroup-paris.com/solo-group/e
         heading.style.opacity = '1';
         sub.style.opacity = '1';
       }, 150);
+
+      // Update "apri a tutto schermo" link
+      if (openLink) openLink.href = iframeSrc[tab];
 
       // Update iframe with fade
       iframe.style.opacity = '0';
