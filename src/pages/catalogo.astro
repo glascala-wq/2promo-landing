@@ -7,6 +7,7 @@ import Footer from '../components/Footer.astro';
 
 const IFRAME_STANDARD = 'https://view.publitas.com/md-it/gifts_ita_without-prices_1/page/1';
 const IFRAME_CUSTOM = 'https://view.publitas.com/md-it/25-1-yourchoice_ita_vr-dakgombypdjg/page/1';
+const IFRAME_ABBIGLIAMENTO = 'https://catalogue.sologroup-paris.com/solo-group/e-catalogue-it-2026/?page=1';
 ---
 
 <BaseLayout
@@ -52,6 +53,13 @@ const IFRAME_CUSTOM = 'https://view.publitas.com/md-it/25-1-yourchoice_ita_vr-da
           class="tab-btn px-6 py-3 font-bold border-b-2 border-transparent text-ink/70 hover:text-ink transition"
         >
           Linea Custom
+        </button>
+        <button
+          id="tab-abbigliamento"
+          data-tab="abbigliamento"
+          class="tab-btn px-6 py-3 font-bold border-b-2 border-transparent text-ink/70 hover:text-ink transition"
+        >
+          Abbigliamento
         </button>
       </div>
 
@@ -120,7 +128,7 @@ const IFRAME_CUSTOM = 'https://view.publitas.com/md-it/25-1-yourchoice_ita_vr-da
   <Footer />
 </BaseLayout>
 
-<script is:inline define:vars={{ IFRAME_STANDARD, IFRAME_CUSTOM }}>
+<script is:inline define:vars={{ IFRAME_STANDARD, IFRAME_CUSTOM, IFRAME_ABBIGLIAMENTO }}>
   (function() {
     var headings = {
       standard: {
@@ -130,30 +138,33 @@ const IFRAME_CUSTOM = 'https://view.publitas.com/md-it/25-1-yourchoice_ita_vr-da
       custom: {
         h2: 'Linea Custom · 268 pagine',
         sub: 'Esempi di lavori su misura: stampa su tutta la superficie, Pantone esatto, ordine minimo 10 pezzi. Quello che fate voi può essere completamente diverso — raccontatecelo.'
+      },
+      abbigliamento: {
+        h2: 'Abbigliamento · 308 pagine',
+        sub: 'T-shirt, felpe, polo, workwear e accessori pronti da personalizzare col vostro logo. Ricamo o stampa, dai piccoli lotti alle grandi quantità.'
       }
     };
     var iframeSrc = {
       standard: IFRAME_STANDARD,
-      custom: IFRAME_CUSTOM
+      custom: IFRAME_CUSTOM,
+      abbigliamento: IFRAME_ABBIGLIAMENTO
     };
+    var validTabs = ['standard', 'custom', 'abbigliamento'];
 
-    var tabStd = document.getElementById('tab-standard');
-    var tabCus = document.getElementById('tab-custom');
+    var tabButtons = Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
     var iframe = document.getElementById('catalog-iframe');
     var heading = document.getElementById('catalog-heading');
     var sub = document.getElementById('catalog-sub');
 
     function setTab(tab) {
-      // Update buttons
-      tabStd.classList.toggle('border-orange', tab === 'standard');
-      tabStd.classList.toggle('text-ink', tab === 'standard');
-      tabStd.classList.toggle('border-transparent', tab !== 'standard');
-      tabStd.classList.toggle('text-ink/70', tab !== 'standard');
-
-      tabCus.classList.toggle('border-orange', tab === 'custom');
-      tabCus.classList.toggle('text-ink', tab === 'custom');
-      tabCus.classList.toggle('border-transparent', tab !== 'custom');
-      tabCus.classList.toggle('text-ink/70', tab !== 'custom');
+      // Update buttons (attivo = arancio, altri = grigi)
+      tabButtons.forEach(function(btn) {
+        var active = btn.getAttribute('data-tab') === tab;
+        btn.classList.toggle('border-orange', active);
+        btn.classList.toggle('text-ink', active);
+        btn.classList.toggle('border-transparent', !active);
+        btn.classList.toggle('text-ink/70', !active);
+      });
 
       // Update heading + sub with fade
       heading.style.opacity = '0';
@@ -177,22 +188,23 @@ const IFRAME_CUSTOM = 'https://view.publitas.com/md-it/25-1-yourchoice_ita_vr-da
 
       // Update URL without reload
       var url = new URL(window.location.href);
-      if (tab === 'custom') {
-        url.searchParams.set('linea', 'custom');
-      } else {
+      if (tab === 'standard') {
         url.searchParams.delete('linea');
+      } else {
+        url.searchParams.set('linea', tab);
       }
       history.replaceState(null, '', url.toString());
     }
 
     // Read initial state from URL
     var params = new URLSearchParams(window.location.search);
-    var initialTab = params.get('linea') === 'custom' ? 'custom' : 'standard';
-    if (initialTab === 'custom') {
-      setTab('custom');
+    var initialTab = params.get('linea');
+    if (validTabs.indexOf(initialTab) !== -1 && initialTab !== 'standard') {
+      setTab(initialTab);
     }
 
-    tabStd.addEventListener('click', function() { setTab('standard'); });
-    tabCus.addEventListener('click', function() { setTab('custom'); });
+    tabButtons.forEach(function(btn) {
+      btn.addEventListener('click', function() { setTab(btn.getAttribute('data-tab')); });
+    });
   })();
 </script>
