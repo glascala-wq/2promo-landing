@@ -4,6 +4,7 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://www.2promo.it',
   output: 'static',
   adapter: cloudflare({
     platformProxy: {

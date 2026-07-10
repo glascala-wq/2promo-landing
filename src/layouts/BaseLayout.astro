@@ -19,6 +19,11 @@ const {
 const GA4_ID = import.meta.env.PUBLIC_GA4_ID ?? 'G-9Y48RGQVJD';
 const GADS_ID = import.meta.env.PUBLIC_GOOGLE_ADS_ID ?? 'AW-16941964190';
 const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID ?? '1547004352951203';
+
+// URL assolute basate su `site` (astro.config.mjs) — evita canonical/og localhost
+const SITE = Astro.site ?? new URL('https://www.2promo.it');
+const canonicalURL = new URL(Astro.url.pathname, SITE);
+const ogImageURL = new URL(ogImage, SITE);
 ---
 
 <!DOCTYPE html>
@@ -34,12 +39,12 @@ const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID ?? '1547004352951203'
   <meta property="og:type" content="website" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={ogImage} />
-  <meta property="og:url" content={Astro.url.href} />
+  <meta property="og:image" content={ogImageURL.href} />
+  <meta property="og:url" content={canonicalURL.href} />
   <meta property="og:locale" content="it_IT" />
 
   <!-- Canonical -->
-  <link rel="canonical" href={Astro.url.href} />
+  <link rel="canonical" href={canonicalURL.href} />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
