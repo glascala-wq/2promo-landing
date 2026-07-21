@@ -17,7 +17,7 @@ const {
   noindex = false,
 } = Astro.props;
 
-const GA4_ID = import.meta.env.PUBLIC_GA4_ID ?? 'G-9Y48RGQVJD';
+const GA4_ID = import.meta.env.PUBLIC_GA4_ID ?? 'G-96YJ53PK26';
 const GADS_ID = import.meta.env.PUBLIC_GOOGLE_ADS_ID ?? 'AW-16941964190';
 const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID ?? '1547004352951203';
 
@@ -81,16 +81,12 @@ const ogImageURL = new URL(ogImage, SITE);
        (gotcha: AW come primary, GA4 come secondary)
        ======================================== -->
   <script is:inline define:vars={{ GADS_ID, GA4_ID }}>
-    var _gads = GADS_ID;
-    var _ga4  = GA4_ID;
-  </script>
-  <script is:inline>
     // Coda gtag disponibile subito (Consent Mode già impostato sopra)
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'AW-16941964190');
-    gtag('config', 'G-9Y48RGQVJD');
+    gtag('config', GADS_ID);
+    gtag('config', GA4_ID);
     // Carica lo script gtag (~350KB) al primo segnale di interazione utente,
     // o come fallback dopo 4s di idle. Evita di competere con il main thread
     // nella finestra LCP (grande guadagno performance mobile).
