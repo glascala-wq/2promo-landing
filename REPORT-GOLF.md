@@ -48,11 +48,17 @@ La prima versione di `/golf` misurava Performance 87: l'LCP (il testo H1 dell'he
 ## Deliverable
 
 1. ✅ Branch `golf` — nessun merge su `main`
-2. ⏳ Deploy preview CF Pages — da push (vedi sotto)
+2. ✅ Deploy preview CF Pages: **https://golf.2promo-landing.pages.dev/golf** (alias branch `golf`, progetto esistente `2promo-landing`)
 3. ✅ Form end-to-end verificato (contatto Brevo creato/eliminato in test; redirect e anti-spam verificati via curl)
 4. ✅ `TBD-REGISTRY.md`
 5. ✅ Questo report
 6. ✅ Lighthouse ≥90/≥95 raggiunto
+
+## Deploy preview
+
+- URL: **https://golf.2promo-landing.pages.dev/golf**
+- Pagine: `/golf`, `/golf/kit-gara`, `/golf/kit-circolo`, `/golf/kit-green`, `/golf/grazie`
+- Deploy manuale via `wrangler pages deploy` sul branch `golf` (il progetto CF Pages esistente non aveva ancora un trigger automatico attivo su branch diversi da `main` al momento del push — verificare in dashboard se si vuole abilitare il deploy automatico per push futuri su questo branch)
 
 ## Prossimi passi (per Cowork/Giovanni)
 
