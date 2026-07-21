@@ -1,3 +1,8 @@
 # Il vecchio robots.txt puntava a /sitemap.xml (non generato da @astrojs/sitemap,
 # che produce sitemap-index.xml). Redirect per non rompere link/crawler già in giro.
 /sitemap.xml /sitemap-index.xml 301
+
+# custom.2promo.it dismesso (ex progetto yourchoice) — tutti i path collassano
+# sull'unica pagina /custom di questo sito. Richiede custom.2promo.it collegato
+# come dominio custom a questo progetto Pages.
+https://custom.2promo.it/* https://www.2promo.it/custom 301
