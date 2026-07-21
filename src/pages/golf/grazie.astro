@@ -4,14 +4,14 @@ import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 
 // Conversione Google Ads dedicata golf: non ancora creata (le campagne partono in un secondo momento).
-// [TBD-ADS-CONVERSION-LABEL] — quando Giovanni crea la conversione in Google Ads, va valorizzata
+// [TBD-ADS-CONVERSION-LABEL]: quando Giovanni crea la conversione in Google Ads, va valorizzata
 // PUBLIC_GOLF_ADS_CONVERSION_LABEL nelle env vars di Cloudflare Pages. Finché è assente, l'evento
-// Ads non parte (mai sparare un send_to con placeholder letterale) — l'evento GA4 generate_lead parte comunque.
+// Ads non parte (mai sparare un send_to con placeholder letterale); l'evento GA4 generate_lead parte comunque.
 const GOLF_ADS_CONVERSION_LABEL = import.meta.env.PUBLIC_GOLF_ADS_CONVERSION_LABEL ?? '';
 ---
 
 <BaseLayout
-  title="Richiesta ricevuta — Golf | 2promo"
+  title="Richiesta ricevuta: verticale Golf | 2promo"
   description="Richiesta ricevuta. Vi rispondiamo entro 24h lavorative con preventivo e data di consegna confermata."
   noindex={true}
 >
@@ -48,11 +48,11 @@ const GOLF_ADS_CONVERSION_LABEL = import.meta.env.PUBLIC_GOLF_ADS_CONVERSION_LAB
   <Footer />
 </BaseLayout>
 
-<!-- Tag conversione golf — separato dal preventivo generico -->
+<!-- Tag conversione golf, separato dal preventivo generico -->
 <script is:inline define:vars={{ GOLF_ADS_CONVERSION_LABEL }}>
   (function() {
     if (typeof gtag === 'function') {
-      // Google Ads conversion — parte solo se la label dedicata golf è stata configurata
+      // Google Ads conversion: parte solo se la label dedicata golf è stata configurata
       if (GOLF_ADS_CONVERSION_LABEL) {
         gtag('event', 'conversion', {
           send_to: 'AW-16941964190/' + GOLF_ADS_CONVERSION_LABEL,

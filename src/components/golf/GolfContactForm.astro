@@ -1,5 +1,5 @@
 ---
-// Form richiesta preventivo golf — pattern anti-spam replicato da ContactForm.astro (honeypot + timestamp + Turnstile)
+// Form richiesta preventivo golf: pattern anti-spam replicato da ContactForm.astro (honeypot + timestamp + Turnstile)
 interface Props {
   preselectKit?: '' | 'kit-gara' | 'kit-circolo' | 'kit-green' | 'catalogo' | 'non-so';
   showHeader?: boolean;
@@ -40,7 +40,7 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
       class="grid grid-cols-1 md:grid-cols-2 gap-5"
       novalidate
     >
-      <!-- Anti-spam L1: honeypot — non rimuovere -->
+      <!-- Anti-spam L1: honeypot, non rimuovere -->
       <div aria-hidden="true" style="position:absolute; left:-9999px; top:-9999px; height:0; width:0; overflow:hidden;">
         <label for="website-golf">Leave this field empty</label>
         <input type="text" name="website" id="website-golf" tabindex="-1" autocomplete="off" />
@@ -101,7 +101,7 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
       <textarea
         name="messaggio"
         rows={4}
-        placeholder="Messaggio — es. numero buche, sponsor coinvolti, dettagli utili"
+        placeholder="Messaggio (es. numero buche, sponsor coinvolti, dettagli utili)"
         class="md:col-span-2 bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream placeholder:text-cream/40 focus:border-orange focus:outline-none transition"
       ></textarea>
       <label class="md:col-span-2 flex items-start gap-3 text-sm text-cream/70">
