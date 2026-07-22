@@ -22,6 +22,10 @@ export default {
         'display-tight': '-0.04em',
         eyebrow: '0.25em',
       },
+      maxWidth: {
+        '6xl': '84rem',
+        '7xl': '96rem',
+      },
     },
   },
   plugins: [],
