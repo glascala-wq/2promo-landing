@@ -1,0 +1,32 @@
+---
+// Copy approvata verbatim, brief §5
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+<section id="rinnovo" class={`bg-cream ${compact ? 'py-16 md:py-20' : 'py-24 md:py-28'} border-t border-ink/10`}>
+  <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-[1.3fr_1fr] gap-10 items-center">
+    <div data-reveal>
+      <div class="flex items-center gap-3 mb-6">
+        <span class="eyebrow text-ink/70">rinnovo stagione</span>
+      </div>
+      <h2 class="font-display-tight text-3xl md:text-5xl leading-[1.05] mb-6">
+        Le bandiere vivono una stagione.
+      </h2>
+      <p class="text-lg text-ink/70 leading-relaxed max-w-xl">
+        A febbraio ti ricontattiamo noi: campo pronto all'apertura, senza pensarci.
+      </p>
+    </div>
+    <div class="bg-white border-2 border-ink/10 rounded-2xl p-8" data-reveal>
+      <p class="text-sm text-ink/70 mb-4">Vuoi essere ricontattato in automatico prima della prossima stagione?</p>
+      <a
+        href="#richiesta"
+        class="btn-orange block text-center bg-orange text-cream py-4 px-6 text-sm font-bold tracking-wide rounded-full hover:bg-ink transition"
+        style="text-decoration:none;"
+      >
+        Richiedi il rinnovo stagionale →
+      </a>
+    </div>
+  </div>
+</section>

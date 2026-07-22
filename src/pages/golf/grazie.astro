@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+// Conversione Google Ads dedicata golf: non ancora creata (le campagne partono in un secondo momento).
+// [TBD-ADS-CONVERSION-LABEL]: quando Giovanni crea la conversione in Google Ads, va valorizzata
+// PUBLIC_GOLF_ADS_CONVERSION_LABEL nelle env vars di Cloudflare Pages. Finché è assente, l'evento
+// Ads non parte (mai sparare un send_to con placeholder letterale); l'evento GA4 generate_lead parte comunque.
+const GOLF_ADS_CONVERSION_LABEL = import.meta.env.PUBLIC_GOLF_ADS_CONVERSION_LABEL ?? '';
+---
+
+<BaseLayout
+  title="Richiesta ricevuta: verticale Golf | 2promo"
+  description="Richiesta ricevuta. Vi rispondiamo entro 24h lavorative con preventivo e data di consegna confermata."
+  noindex={true}
+>
+  <Navbar activeRoute="other" />
+
+  <header class="relative overflow-hidden bg-cream min-h-[60vh] flex items-center">
+    <div class="absolute inset-0 glow-orange pointer-events-none"></div>
+    <div class="relative max-w-4xl mx-auto px-6 py-24 text-center">
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-orange text-cream text-4xl mb-8" data-reveal>✓</div>
+      <h1 class="font-display-tight text-5xl md:text-7xl text-ink leading-[0.95] mb-6" data-reveal>
+        Richiesta ricevuta.
+      </h1>
+      <p class="text-2xl md:text-3xl text-ink/75 max-w-2xl mx-auto mb-6 leading-relaxed" data-reveal>
+        Vi rispondiamo <strong class="text-ink">entro 24h lavorative</strong> con preventivo e data di consegna confermata.
+      </p>
+      <p class="text-ink/60 max-w-xl mx-auto" data-reveal>
+        Per urgenze potete scriverci anche su <a href="https://wa.me/393451448645?text=Ciao%202promo%2C%20vi%20scrivo%20per%20il%20verticale%20golf" target="_blank" rel="noopener" class="text-orange underline">WhatsApp</a>.
+      </p>
+    </div>
+  </header>
+
+  <section class="bg-cream pb-24 md:pb-28">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <a
+        href="/golf"
+        class="inline-block border-2 border-ink text-ink px-8 py-4 rounded-full font-bold tracking-wide hover:bg-ink hover:text-cream transition"
+        style="text-decoration:none;"
+      >
+        ← Torna al verticale Golf
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<!-- Tag conversione golf, separato dal preventivo generico -->
+<script is:inline define:vars={{ GOLF_ADS_CONVERSION_LABEL }}>
+  (function() {
+    if (typeof gtag === 'function') {
+      // Google Ads conversion: parte solo se la label dedicata golf è stata configurata
+      if (GOLF_ADS_CONVERSION_LABEL) {
+        gtag('event', 'conversion', {
+          send_to: 'AW-16941964190/' + GOLF_ADS_CONVERSION_LABEL,
+        });
+      }
+      gtag('event', 'generate_lead', {
+        currency: 'EUR',
+        form_id: 'golf',
+      });
+    }
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead', { content_name: 'Golf' });
+    }
+  })();
+</script>

@@ -1,0 +1,147 @@
+---
+// Form richiesta preventivo golf: pattern anti-spam replicato da ContactForm.astro (honeypot + timestamp + Turnstile)
+// Il campo "kit" testuale è stato rimosso: la selezione prodotti fatta in GolfComponiKit.astro
+// pre-compila direttamente il campo messaggio (vedi script in quel componente).
+interface Props {
+  showHeader?: boolean;
+  id?: string;
+}
+const { showHeader = true, id = 'richiesta' } = Astro.props;
+
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+<section id={id} class="bg-ink text-cream py-24 md:py-28 relative overflow-hidden">
+  <div class="absolute -bottom-32 -left-20 w-[400px] h-[400px] rounded-full bg-orange/15 blur-3xl pointer-events-none"></div>
+  <div class="max-w-4xl mx-auto px-6 relative">
+    {showHeader && (
+      <>
+        <div class="flex items-center gap-3 mb-6" data-reveal>
+          <span class="eyebrow text-orange">richiedi il preventivo</span>
+        </div>
+        <h2 class="font-display-tight text-4xl md:text-6xl leading-[1] mb-6 max-w-2xl" data-reveal>
+          Dicci la data della gara.
+        </h2>
+        <p class="text-lg text-cream/75 mb-12 max-w-xl" data-reveal>
+          Bozza grafica entro 24h. Data di consegna confermata nel preventivo.
+        </p>
+      </>
+    )}
+    <form
+      id="form-golf"
+      action="/api/lead-golf"
+      method="POST"
+      class="grid grid-cols-1 md:grid-cols-2 gap-5"
+      novalidate
+    >
+      <!-- Anti-spam L1: honeypot, non rimuovere -->
+      <div aria-hidden="true" style="position:absolute; left:-9999px; top:-9999px; height:0; width:0; overflow:hidden;">
+        <label for="website-golf">Leave this field empty</label>
+        <input type="text" name="website" id="website-golf" tabindex="-1" autocomplete="off" />
+      </div>
+      <!-- Anti-spam L3: timestamp di caricamento (sovrascritto lato client) -->
+      <input type="hidden" name="_form_loaded" value="0" />
+
+      <input
+        type="text"
+        name="nome"
+        placeholder="Nome e Cognome*"
+        required
+        class="bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream placeholder:text-cream/40 focus:border-orange focus:outline-none transition"
+      />
+      <input
+        type="text"
+        name="azienda"
+        placeholder="Circolo / Azienda*"
+        required
+        class="bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream placeholder:text-cream/40 focus:border-orange focus:outline-none transition"
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email*"
+        required
+        class="bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream placeholder:text-cream/40 focus:border-orange focus:outline-none transition"
+      />
+      <input
+        type="tel"
+        name="telefono"
+        placeholder="Telefono*"
+        required
+        class="bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream placeholder:text-cream/40 focus:border-orange focus:outline-none transition"
+      />
+      <label class="md:col-span-2 flex flex-col gap-1.5">
+        <span class="text-xs text-cream/60 pl-1">Data della gara*</span>
+        <input
+          type="date"
+          name="data_gara"
+          required
+          class="bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream focus:border-orange focus:outline-none transition [color-scheme:dark]"
+        />
+      </label>
+      <textarea
+        name="messaggio"
+        rows={4}
+        placeholder="Messaggio (es. numero buche, sponsor coinvolti, dettagli utili)"
+        class="md:col-span-2 bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream placeholder:text-cream/40 focus:border-orange focus:outline-none transition"
+      ></textarea>
+      <label class="md:col-span-2 flex items-start gap-3 text-sm text-cream/70">
+        <input type="checkbox" name="rinnovo" value="si" class="mt-1 accent-orange" />
+        <span>Siamo interessati anche al rinnovo stagionale automatico.</span>
+      </label>
+      <label class="md:col-span-2 flex items-start gap-3 text-sm text-cream/70">
+        <input type="checkbox" name="privacy" required class="mt-1 accent-orange" />
+        <span>Ho letto e accetto la <a href="/privacy" class="underline hover:text-orange transition">Privacy Policy</a>.</span>
+      </label>
+      <!-- Anti-spam L2: Cloudflare Turnstile -->
+      <div class="cf-turnstile md:col-span-2" data-sitekey={TURNSTILE_SITE_KEY} data-theme="dark" data-size="flexible"></div>
+      <button
+        type="submit"
+        class="btn-orange md:col-span-2 bg-orange text-cream py-5 px-8 text-base font-bold tracking-wide rounded-full hover:bg-cream hover:text-ink transition"
+      >
+        Richiedi Preventivo →
+      </button>
+    </form>
+    <p class="text-sm text-cream/60 mt-6">
+      Preventivo con data di consegna confermata. Nessun obbligo di acquisto.
+    </p>
+  </div>
+</section>
+
+<!-- Anti-spam L2: Turnstile loader -->
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<script is:inline>
+  (function() {
+    var form = document.getElementById('form-golf');
+    if (!form) return;
+    var ts = form.querySelector('input[name="_form_loaded"]');
+    if (ts) ts.value = Date.now();
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) {
+        btn.textContent = 'Invio in corso…';
+        btn.disabled = true;
+      }
+      try {
+        var data = new FormData(form);
+        var resp = await fetch('/api/lead-golf', {
+          method: 'POST',
+          body: data,
+        });
+        if (resp.ok) {
+          window.location.href = '/golf/grazie';
+        } else {
+          throw new Error('Errore ' + resp.status);
+        }
+      } catch(err) {
+        if (btn) {
+          btn.textContent = 'Riprova →';
+          btn.disabled = false;
+        }
+        if (window.turnstile) { try { window.turnstile.reset(); } catch(_) {} }
+        alert('Qualcosa è andato storto. Riprova o scrivici a info@2promo.it');
+      }
+    });
+  })();
+</script>
