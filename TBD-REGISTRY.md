@@ -25,8 +25,7 @@ La sezione "Componi il tuo kit" mostra 13 prodotti, **tutti con foto reale, ness
 
 | Item | Dove | Nota |
 |---|---|---|
-| `[TBD-FOTO]` Banchetto segreteria | `src/data/golf-products.ts`, immagine `banchetto.webp` | **Compromesso non risolto**: mostra un campione di tessuto, non un banchetto. Nessuna foto pulita di banchetto esiste nel catalogo Ultima Displays (tutte le foto a colori mostrano una modella) e nessuna alternativa stock nello stesso stile è stata trovata. Serve una foto vera del prodotto: campione fisico fotografato in proprio, area riservata fornitore, o servizio fotografico dedicato. |
-| `[TBD-FOTO]` Tovaglia premiazioni | `src/data/golf-products.ts`, immagine `tovaglia.webp` | Mostra un rendering 3D ("Gala"), non una foto reale. Da sostituire se arriva una foto reale del prodotto. |
+| `[TBD-FOTO]` Tovaglia premiazioni, Banchetto segreteria | `src/data/golf-products.ts`, immagini `tovaglia.webp` e `banchetto.webp` | Entrambe mostrano render (non foto reali) dei prodotti veri ("Gala" e "Banchetto FastFrame"): puliti e corretti, ma non fotografie. Da sostituire se in futuro arriva una foto reale dei prodotti (campione fisico fotografato in proprio, o area riservata fornitore). Non bloccante. |
 
 ## Come procedere
 

@@ -1,8 +1,8 @@
 # Report: Verticale Golf (`/golf`)
 
-Branch `golf` su `glascala-wq/2promo-landing`. Sviluppato in autonomia secondo `PROJECTS/2promo/verticale-golf/cc-brief-golf.md`, approvato da Giovanni il 21 luglio 2026, con correzioni di rotta date da Giovanni in sessione lo stesso giorno e il giorno dopo (vedi "Round 2", "Round 3", "Round 4", "Round 5", "Round 6", "Round 7", "Round 8", "Round 9" più sotto).
+Branch `golf` su `glascala-wq/2promo-landing`. Sviluppato in autonomia secondo `PROJECTS/2promo/verticale-golf/cc-brief-golf.md`, approvato da Giovanni il 21 luglio 2026, con correzioni di rotta date da Giovanni in sessione lo stesso giorno e il giorno dopo (vedi "Round 2" - "Round 11" più sotto).
 
-## Cosa c'è (stato attuale, dopo Round 9)
+## Cosa c'è (stato attuale, dopo Round 11)
 
 - `/golf`: landing long-scroll con hero, trust marquee (riuso client esistenti), sezione "Componi il tuo kit" (13 prodotti selezionabili), struttura+grafica, come funziona e promessa consegna, rinnovo stagione, FAQ, form richiesta
 - `/golf/grazie`: thank-you dedicata, tag conversione golf separato (Google Ads condizionato a env var, GA4 sempre attivo)
@@ -83,6 +83,16 @@ Due segnalazioni di Giovanni:
 
 1. **Gazebo hospitality**: richiesta la linea "Zoom Tent" invece di "Steel Tent" (usata nel Round 8). Controllata l'intera categoria Gazebo: le uniche varianti colorate sono "Steel Tent", la linea "Zoom Tent" esiste solo in bianco (foto originale, "sembra da ospedale") o nero. Usata la variante nera "Parete Intera Zoom Tent": soddisfa la richiesta ed evita comunque l'effetto ospedale del bianco.
 2. **Banchetto segreteria**: Giovanni ha indicato `ultimadisplays.it/product/reception-luminar/` come possibile foto. Controllato: il prodotto è in realta "Reception **Illuminova** Luminar", parte della linea Illuminova, uno dei nomi commerciali vietati dal brief anche se non visibile nello slug URL; la foto mostra inoltre una terza modella diversa (due gia scartate nel Round 8). Controllata anche l'intera sottocategoria "Banchetti Desk Luminosi" (3 prodotti): nessuna alternativa, tutti o nome vietato o modella. **Confermato in modo definitivo che nessuna foto di banchetto pulita esiste in tutto il catalogo Ultima Displays.** Il compromesso del Round 8 (campione di tessuto) resta l'unica opzione, vedi `TBD-REGISTRY.md`.
+
+## Round 10 (22 luglio, corretta la regola sui nomi di linea)
+
+Giovanni ha chiesto di correggere il brief: la regola "fornitore invisibile" resta invariata, ma il divieto sui nomi commerciali di linea prodotto (Formulate, Modulate, Illumigo, Illuminova, Embrace+, FastFrame, Vector) è tolto, non identificano il fornitore. Aggiornato `PROJECTS/2promo/verticale-golf/cc-brief-golf.md` § 7. Verificato subito se questo sbloccava una foto per "Banchetto segreteria": ricontrollati i 3 prodotti scartati finora solo per nome (Vector Curvo, Vector Dritto, Illumigo Counter). Nessuno si sblocca, tutti mostrano comunque un modello o un primo piano di un occhio umano (persona, non solo il nome era il problema). Il compromesso del Round 8 resta.
+
+## Round 11 (22 luglio, ri-audit completo e risolto "Banchetto segreteria")
+
+Giovanni ha chiesto di ri-eseguire l'audit sistematico sui 72 prodotti Ultima Displays esclusi in precedenza solo per nome di linea vietato (Round 4-6), ora che quel divieto è stato tolto. Eseguito con lo stesso doppio giro (giudizio iniziale su batch paralleli + riverifica indipendente scettica) già usato per il catalogo principale. Di 68 prodotti effettivamente valutati (2 batch, 13 prodotti, bloccati dalla protezione anti-bot del sito, verificati poi manualmente), confermate 16 immagini pulite in più per tutto il sito (dettaglio in `PROJECTS/2promo/materiale-ultimadisplays.md`).
+
+Tra queste, finalmente una foto pulita di banchetto: **Banchetto FastFrame**, nessun modello, nessun logo fornitore, grafica dimostrativa con uccelli origami su montagne. Sostituisce il campione di tessuto usato come compromesso dal Round 8. **"Banchetto segreteria" ha ora una foto vera del prodotto per la prima volta in questo progetto.** Il selettore "Componi il tuo kit" resta a 13 prodotti, tutti con foto reale a colori, e non ha più nessuna scelta di compromesso "prodotto sbagliato" (restano solo due render invece di foto, per tovaglia e banchetto: qualità corretta, solo non fotografie).
 
 ## Lighthouse (build di produzione, locale, dopo Round 4)
 
