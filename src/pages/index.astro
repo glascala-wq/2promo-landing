@@ -6,7 +6,7 @@ import Hero from '../components/Hero.astro';
 import Trust from '../components/Trust.astro';
 import Counters from '../components/Counters.astro';
 import Categories from '../components/Categories.astro';
-import Showcase from '../components/Showcase.astro';
+import AllestimentiShowcase from '../components/AllestimentiShowcase.astro';
 import EscapeHatchCustom from '../components/EscapeHatchCustom.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import Faq from '../components/Faq.astro';
@@ -46,6 +46,10 @@ const faqItems = [
     q: 'Spedite i gadget personalizzati in tutta Italia?',
     a: 'Sì, in tutta Italia. Su richiesta, anche nel resto d\'Europa. Stampa e personalizzazione vengono curate dal nostro team interno.',
   },
+  {
+    q: 'Fate anche allestimenti per fiere ed eventi?',
+    a: 'Sì: fondali, totem, banchetti, segnaletica, gazebo, bandiere e roll-up, con lo stesso sistema modulare e la stessa attenzione dei gadget. Forniamo il materiale, non il servizio di installazione in loco. <a href="/allestimenti" class="text-orange underline">Scoprite la pagina dedicata agli allestimenti</a>.',
+  },
 ];
 ---
 
@@ -59,7 +63,7 @@ const faqItems = [
   <Trust variant="marquee" />
   <Counters />
   <Categories />
-  <Showcase />
+  <AllestimentiShowcase />
   <EscapeHatchCustom />
   <HowItWorks variant="standard" />
   <Faq items={faqItems} />
