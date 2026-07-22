@@ -234,7 +234,7 @@ const ogImageURL = new URL(ogImage, SITE);
       if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-      var GLOW_SIZE = 70;
+      var GLOW_SIZE = 40;
       var RING_SIZE = 32;
       var DOT_SIZE = 6;
 
@@ -259,6 +259,7 @@ const ogImageURL = new URL(ogImage, SITE);
       var glowScale = 1;
       var ringScale = 1;
       var active = false;
+      var isPressed = false;
 
       window.addEventListener('mousemove', function (e) {
         targetX = e.clientX;
@@ -280,7 +281,11 @@ const ogImageURL = new URL(ogImage, SITE);
 
       window.addEventListener('mousedown', function () {
         glowScale = 1.3;
-        ringScale = 0.6;
+        isPressed = true;
+      }, { passive: true });
+
+      window.addEventListener('mouseup', function () {
+        isPressed = false;
       }, { passive: true });
 
       function tick() {
@@ -289,7 +294,7 @@ const ogImageURL = new URL(ogImage, SITE);
         ringX += (targetX - ringX) * 0.25;
         ringY += (targetY - ringY) * 0.25;
         glowScale += (1 - glowScale) * 0.08;
-        ringScale += (1 - ringScale) * 0.15;
+        ringScale += ((isPressed ? 0.4 : 1) - ringScale) * 0.2;
 
         glow.style.transform = 'translate3d(' + (glowX - GLOW_SIZE / 2) + 'px, ' + (glowY - GLOW_SIZE / 2) + 'px, 0) scale(' + glowScale + ')';
         ring.style.transform = 'translate3d(' + (ringX - RING_SIZE / 2) + 'px, ' + (ringY - RING_SIZE / 2) + 'px, 0) scale(' + ringScale + ')';
