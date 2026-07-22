@@ -1,8 +1,8 @@
 # Report: Verticale Golf (`/golf`)
 
-Branch `golf` su `glascala-wq/2promo-landing`. Sviluppato in autonomia secondo `PROJECTS/2promo/verticale-golf/cc-brief-golf.md`, approvato da Giovanni il 21 luglio 2026, con correzioni di rotta date da Giovanni in sessione lo stesso giorno e il giorno dopo (vedi "Round 2", "Round 3", "Round 4", "Round 5", "Round 6", "Round 7", "Round 8" più sotto).
+Branch `golf` su `glascala-wq/2promo-landing`. Sviluppato in autonomia secondo `PROJECTS/2promo/verticale-golf/cc-brief-golf.md`, approvato da Giovanni il 21 luglio 2026, con correzioni di rotta date da Giovanni in sessione lo stesso giorno e il giorno dopo (vedi "Round 2", "Round 3", "Round 4", "Round 5", "Round 6", "Round 7", "Round 8", "Round 9" più sotto).
 
-## Cosa c'è (stato attuale, dopo Round 8)
+## Cosa c'è (stato attuale, dopo Round 9)
 
 - `/golf`: landing long-scroll con hero, trust marquee (riuso client esistenti), sezione "Componi il tuo kit" (13 prodotti selezionabili), struttura+grafica, come funziona e promessa consegna, rinnovo stagione, FAQ, form richiesta
 - `/golf/grazie`: thank-you dedicata, tag conversione golf separato (Google Ads condizionato a env var, GA4 sempre attivo)
@@ -76,6 +76,13 @@ Giovanni ha rivisto la griglia del Round 7 e segnalato 4 correzioni:
 4. **Bandiere campo (18 buche)**: la bandierina da buca non è un prodotto Ultima Displays (loro vendono bandiere fieristiche, non attrezzatura da campo golf). Usata una foto stock esterna da Pexels: bandierina gialla in buca, nessuna persona, nessun logo di club reale visibile (due foto scartate prima di questa: una con un giocatore sullo sfondo, una con il logo di un circolo reale sulla bandiera).
 
 Prima volta in questo progetto che si esce dal catalogo Ultima Displays per una foto prodotto: giustificato perche il fornitore semplicemente non vende quei due tipi di prodotto (bandiere nazionali, bandierine da buca), non per scelta di comodo.
+
+## Round 9 (22 luglio, gazebo Zoom Tent e ultimo tentativo banchetto)
+
+Due segnalazioni di Giovanni:
+
+1. **Gazebo hospitality**: richiesta la linea "Zoom Tent" invece di "Steel Tent" (usata nel Round 8). Controllata l'intera categoria Gazebo: le uniche varianti colorate sono "Steel Tent", la linea "Zoom Tent" esiste solo in bianco (foto originale, "sembra da ospedale") o nero. Usata la variante nera "Parete Intera Zoom Tent": soddisfa la richiesta ed evita comunque l'effetto ospedale del bianco.
+2. **Banchetto segreteria**: Giovanni ha indicato `ultimadisplays.it/product/reception-luminar/` come possibile foto. Controllato: il prodotto è in realta "Reception **Illuminova** Luminar", parte della linea Illuminova, uno dei nomi commerciali vietati dal brief anche se non visibile nello slug URL; la foto mostra inoltre una terza modella diversa (due gia scartate nel Round 8). Controllata anche l'intera sottocategoria "Banchetti Desk Luminosi" (3 prodotti): nessuna alternativa, tutti o nome vietato o modella. **Confermato in modo definitivo che nessuna foto di banchetto pulita esiste in tutto il catalogo Ultima Displays.** Il compromesso del Round 8 (campione di tessuto) resta l'unica opzione, vedi `TBD-REGISTRY.md`.
 
 ## Lighthouse (build di produzione, locale, dopo Round 4)
 
