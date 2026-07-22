@@ -30,8 +30,8 @@ import { GOLF_PRODUCTS } from '../../data/golf-products';
             </svg>
           </div>
           {p.type === 'photo' ? (
-            <div class="aspect-square bg-gray-light">
-              <img src={p.image} alt={p.name} class="w-full h-full object-cover" width="400" height="400" loading="lazy" />
+            <div class="aspect-square bg-white flex items-center justify-center">
+              <img src={p.image} alt={p.name} class="max-w-full max-h-full object-contain" width="400" height="400" loading="lazy" />
             </div>
           ) : (
             <div class={`aspect-square ${p.blockBg} ${p.blockText} flex items-center p-4`}>
