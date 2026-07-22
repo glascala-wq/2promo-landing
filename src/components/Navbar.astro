@@ -7,7 +7,7 @@ const { activeRoute = 'home' } = Astro.props;
 <nav id="nav" class="sticky top-0 z-40 transition-all duration-300 bg-cream/60">
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
     <a href="/" style="text-decoration:none;">
-      <img src="/brand/logo.webp" alt="2promo.it: gadget e allestimenti personalizzati" class={`h-10 md:h-12 w-auto ${activeRoute === 'home' ? 'logo-intro' : ''}`} width="600" height="218" fetchpriority="high" />
+      <img src="/brand/logo.svg" alt="2promo.it: gadget e allestimenti personalizzati" class={`h-10 md:h-12 w-auto ${activeRoute === 'home' ? 'logo-intro' : ''}`} width="600" height="218" fetchpriority="high" />
     </a>
     <div class="hidden md:flex items-center gap-7 text-sm font-bold">
       <a href="/" class={`nav-link hover:text-orange transition ${activeRoute === 'home' ? 'active' : ''}`}>Home</a>
