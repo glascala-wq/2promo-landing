@@ -1,19 +1,11 @@
 // API route: POST /api/lead-golf
-// Riceve il form richiesta preventivo del verticale golf → crea contatto Brevo (lista "2promo - Lead Golf")
-// + invia email notifica interna → redirige a /golf/grazie
+// Riceve il form richiesta preventivo del verticale golf: crea contatto Brevo (lista "2promo - Lead Golf")
+// e invia email notifica interna, poi redirige a /golf/grazie
 // Pattern anti-spam e struttura replicati da src/pages/api/lead.ts (non toccare quel file).
 
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-
-const KIT_LABELS: Record<string, string> = {
-  'kit-gara': 'Kit Gara Sponsor',
-  'kit-circolo': 'Kit Circolo',
-  'kit-green': 'Kit Green',
-  catalogo: 'Catalogo completo',
-  'non-so': 'Non so ancora',
-};
 
 export const POST: APIRoute = async ({ request, locals }) => {
   const env = (locals as any).runtime?.env ?? import.meta.env;
@@ -39,9 +31,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
     });
   }
 
-  // === ANTI-SPAM — stesso schema a 3 livelli di /api/lead ===
+  // === ANTI-SPAM, stesso schema a 3 livelli di /api/lead ===
 
-  // L1: Honeypot. Bot riempie il campo trappola → fake success.
+  // L1: Honeypot. Bot riempie il campo trappola, fake success.
   const honeypot = (formData.get('website') as string | null) ?? '';
   if (honeypot.length > 0) {
     return new Response(JSON.stringify({ ok: true }), {
@@ -50,7 +42,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     });
   }
 
-  // L3: Time-based. Submit troppo veloce (<3s) → bot. Fake success.
+  // L3: Time-based. Submit troppo veloce (<3s), fake success.
   const formLoaded = parseInt((formData.get('_form_loaded') as string | null) ?? '0', 10);
   const elapsed = Date.now() - formLoaded;
   if (!formLoaded || elapsed < 3000) {
@@ -66,7 +58,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     });
   }
 
-  // L2: Cloudflare Turnstile (chiamata esterna → per ultima).
+  // L2: Cloudflare Turnstile (chiamata esterna, per ultima).
   const turnstileToken = (formData.get('cf-turnstile-response') as string | null) ?? '';
   if (!turnstileToken) {
     return new Response(JSON.stringify({ error: 'Verifica anti-spam richiesta' }), {
@@ -102,18 +94,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const email = (formData.get('email') as string | null)?.trim() ?? '';
   const telefono = (formData.get('telefono') as string | null)?.trim() ?? '';
   const dataGara = (formData.get('data_gara') as string | null)?.trim() ?? '';
-  const kitValue = (formData.get('kit') as string | null)?.trim() ?? '';
   const messaggio = (formData.get('messaggio') as string | null)?.trim() ?? '';
   const rinnovo = (formData.get('rinnovo') as string | null) === 'si';
 
-  if (!nome || !azienda || !email || !telefono || !dataGara || !kitValue) {
+  if (!nome || !azienda || !email || !telefono || !dataGara) {
     return new Response(JSON.stringify({ error: 'Campi obbligatori mancanti' }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
     });
   }
-
-  const kitLabel = KIT_LABELS[kitValue] ?? kitValue;
 
   const nomeParts = nome.split(' ');
   const firstName = nomeParts[0] ?? nome;
@@ -128,7 +117,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
       TELEFONO: telefono,
       AZIENDA: azienda,
       DATA_GARA: dataGara,
-      KIT: kitLabel,
       RINNOVO: rinnovo ? 'si' : 'no',
       MESSAGGIO: messaggio || undefined,
       SOURCE: 'landing-golf',
@@ -150,28 +138,27 @@ export const POST: APIRoute = async ({ request, locals }) => {
   if (!brevoContactResp.ok) {
     const errText = await brevoContactResp.text();
     console.error('Brevo contact error:', brevoContactResp.status, errText);
-    // Continua comunque — l'utente non deve sapere dell'errore CRM
+    // Continua comunque, l'utente non deve sapere dell'errore CRM
   }
 
   // 2. Invia email di notifica interna (transazionale, non automazione)
   const notificationPayload = {
     sender: { name: '2promo Golf', email: 'noreply@2promo.it' },
     to: [{ email: BREVO_NOTIFICATION_EMAIL }],
-    subject: `[2promo Golf] Nuova richiesta da ${nome} (${azienda}) — ${kitLabel}`,
+    subject: `[2promo Golf] Nuova richiesta da ${nome} (${azienda})`,
     htmlContent: `
-      <h2>Nuova richiesta preventivo — verticale Golf</h2>
+      <h2>Nuova richiesta preventivo, verticale Golf</h2>
       <p><strong>Nome:</strong> ${nome}</p>
       <p><strong>Circolo/Azienda:</strong> ${azienda}</p>
       <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
       <p><strong>Telefono:</strong> ${telefono}</p>
       <p><strong>Data gara:</strong> ${dataGara}</p>
-      <p><strong>Kit d'interesse:</strong> ${kitLabel}</p>
       <p><strong>Rinnovo stagionale:</strong> ${rinnovo ? 'Sì' : 'No'}</p>
       <hr/>
-      <p><strong>Messaggio:</strong></p>
-      <blockquote style="border-left:3px solid #FE5000;padding-left:12px;color:#555;">${(messaggio || '—').replace(/\n/g, '<br>')}</blockquote>
+      <p><strong>Messaggio (include i prodotti selezionati in "Componi il tuo kit", se presenti):</strong></p>
+      <blockquote style="border-left:3px solid #FE5000;padding-left:12px;color:#555;">${(messaggio || '(nessun messaggio)').replace(/\n/g, '<br>')}</blockquote>
       <hr/>
-      <p style="color:#999;font-size:12px;">Inviato dal verticale golf — 2promo.it/golf</p>
+      <p style="color:#999;font-size:12px;">Inviato dal verticale golf, 2promo.it/golf</p>
     `,
   };
 

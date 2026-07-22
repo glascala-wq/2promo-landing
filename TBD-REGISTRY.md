@@ -4,14 +4,7 @@ Elenco completo di ogni placeholder `[TBD-*]` introdotto per il verticale `/golf
 
 ## Prezzi
 
-I kit sono ancora un'idea di composizione, non un listino definitivo (indicazione di Giovanni, 21/07): niente prezzo pubblicato sul sito. Ogni kit mostra un pulsante "Richiedi il prezzo" al posto del prezzo, sia nella griglia su `/golf` sia nella pagina di dettaglio. Nessun placeholder di prezzo da riempire finché non si decide di pubblicare un listino.
-
-## Quantità
-
-| Placeholder | Dove | Cosa serve |
-|---|---|---|
-| `[TBD-QTY-TEEMARKER]` | `src/data/golf-kits.ts` (kit Gara Sponsor, campo `includes`) | Numero di tee marker inclusi nel Kit Gara Sponsor |
-| `[TBD-QTY]` | `src/data/golf-kits.ts` (kit Circolo, campo `includes`) | Numero di bandiere personalizzate incluse nel Kit Circolo |
+Niente prezzo pubblicato sul sito: il modello è "componi il tuo kit", selezione prodotti più richiesta preventivo via form, con un pulsante "Richiedi il preventivo" al posto del prezzo. Nessun placeholder di prezzo da riempire finché non si decide di pubblicare un listino.
 
 ## Tempi di produzione e riordino
 
@@ -28,17 +21,17 @@ I kit sono ancora un'idea di composizione, non un listino definitivo (indicazion
 
 ## Immagini
 
-Ogni card di kit e catalogo ha ormai un visual reale: le 3 foto prodotto pulite trovate su Ultima Displays (fondali, gazebo, gonfiabili), trattate in un duotone navy/cream coerente con la palette 2promo, più 6 icone originali disegnate da zero per gli item senza foto disponibile (banchetti, segnaletica, tovaglie/bandiere istituzionali, roll up, totem, bandiera buca). Nessun placeholder "Foto in arrivo" rimasto. Dettaglio completo di ogni scelta in `PROJECTS/2promo/verticale-golf/mapping-prodotti.md` (file interno).
+La sezione "Componi il tuo kit" mostra 14 prodotti: 4 con foto reale anonimizzata (fondale, gazebo, gonfiabile, segnaletica, tutte trattate in duotone navy/cream), 10 con una card tipografica piena (nome prodotto su blocco di colore, nessuna foto). Nessuna icona, nessun placeholder "Foto in arrivo".
 
-Resta scoperto solo il tessile golf vero e proprio (bandiere gara, bandiere circolo, bandiere green, tee marker), fornito da Canepa & Campi: oggi rappresentato dalle icone, non da foto reali del prodotto specifico.
+Il gruppo di prodotti senza foto reale è quasi interamente il tessile golf vero e proprio (bandiere gara, bandiere circolo, bandiere green, bandiere istituzionali, tee marker, tovaglia), fornito da Canepa & Campi, verificato senza foto disponibile online. Anche banner, totem, banchetto e roll up restano a card tipografica: le foto disponibili sul catalogo Ultima Displays mostrano solo modelli o il nome commerciale proprietario vietato "Vector". Dettaglio completo di ogni scelta e di cosa è stato scartato in `PROJECTS/2promo/verticale-golf/mapping-prodotti.md` (file interno).
 
 | Item | Dove | Nota |
 |---|---|---|
-| `[TBD-FOTO]` Bandiere gara, bandiere circolo, bandiere green, tee marker | Rappresentati con icone generiche nelle card kit, non foto | Da fotografare quando arriva un campione fisico, o recuperare da area riservata fornitore Canepa & Campi, poi sostituire l'icona con la foto reale |
+| `[TBD-FOTO]` Bandiere gara, bandiere circolo, bandiere green, bandiere istituzionali, tee marker, tovaglia | `src/data/golf-products.ts`, card `type: 'block'` | Da fotografare quando arriva un campione fisico, o recuperare da area riservata fornitore Canepa & Campi |
+| `[TBD-FOTO]` Banner, totem, banchetto, roll up | `src/data/golf-products.ts`, card `type: 'block'` | Da recuperare da area riservata Ultima Displays (foto senza modello) o con un servizio fotografico proprio |
 
 ## Come procedere
 
 1. Cercare e sostituire ogni placeholder in questo file con il valore reale.
-2. Aggiornare `src/data/golf-kits.ts` nei punti indicati.
-3. Quando arriva una foto vera del tessile golf, seguire le regole in `verticale-golf/mapping-prodotti.md`, salvarla in `public/golf/products/`, poi sostituire l'`icon` con un `image` nel file indicato (vedi `GolfCatalogoCompleto.astro` o `golf-kits.ts` per il pattern già in uso sugli altri item).
-4. Cancellare le righe di questo registro via via che vengono risolte.
+2. Quando arriva una foto vera, seguire le regole in `verticale-golf/mapping-prodotti.md`, salvarla in `public/golf/products/`, poi in `src/data/golf-products.ts` cambiare l'item da `type: 'block'` a `type: 'photo'` con il campo `image`.
+3. Cancellare le righe di questo registro via via che vengono risolte.

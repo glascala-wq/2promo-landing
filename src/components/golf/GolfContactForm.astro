@@ -1,19 +1,12 @@
 ---
 // Form richiesta preventivo golf: pattern anti-spam replicato da ContactForm.astro (honeypot + timestamp + Turnstile)
+// Il campo "kit" testuale è stato rimosso: la selezione prodotti fatta in GolfComponiKit.astro
+// pre-compila direttamente il campo messaggio (vedi script in quel componente).
 interface Props {
-  preselectKit?: '' | 'kit-gara' | 'kit-circolo' | 'kit-green' | 'catalogo' | 'non-so';
   showHeader?: boolean;
   id?: string;
 }
-const { preselectKit = '', showHeader = true, id = 'richiesta' } = Astro.props;
-
-const KIT_OPTIONS: Array<{ value: string; label: string }> = [
-  { value: 'kit-gara', label: 'Kit Gara Sponsor' },
-  { value: 'kit-circolo', label: 'Kit Circolo' },
-  { value: 'kit-green', label: 'Kit Green' },
-  { value: 'catalogo', label: 'Catalogo completo' },
-  { value: 'non-so', label: 'Non so ancora' },
-];
+const { showHeader = true, id = 'richiesta' } = Astro.props;
 
 const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
@@ -76,7 +69,7 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
         required
         class="bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream placeholder:text-cream/40 focus:border-orange focus:outline-none transition"
       />
-      <label class="flex flex-col gap-1.5">
+      <label class="md:col-span-2 flex flex-col gap-1.5">
         <span class="text-xs text-cream/60 pl-1">Data della gara*</span>
         <input
           type="date"
@@ -84,19 +77,6 @@ const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
           required
           class="bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream focus:border-orange focus:outline-none transition [color-scheme:dark]"
         />
-      </label>
-      <label class="flex flex-col gap-1.5">
-        <span class="text-xs text-cream/60 pl-1">Kit d'interesse*</span>
-        <select
-          name="kit"
-          required
-          class="bg-cream/5 border-2 border-cream/20 rounded-xl px-5 py-4 text-cream focus:border-orange focus:outline-none transition"
-        >
-          <option value="" disabled selected={!preselectKit}>Seleziona...</option>
-          {KIT_OPTIONS.map((opt) => (
-            <option value={opt.value} selected={preselectKit === opt.value}>{opt.label}</option>
-          ))}
-        </select>
       </label>
       <textarea
         name="messaggio"

@@ -1,0 +1,124 @@
+---
+// Componi il tuo kit: selettore prodotti, non un carrello (niente checkout/pagamento qui,
+// regola brief §0.4). La selezione client-side pre-compila il messaggio del form richiesta.
+import { GOLF_PRODUCTS } from '../../data/golf-products';
+---
+<section id="componi" class="bg-cream py-24 md:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex items-center gap-3 mb-6" data-reveal>
+      <span class="eyebrow text-ink/70">componi il tuo kit</span>
+    </div>
+    <h2 class="font-display-tight text-4xl md:text-6xl leading-[1] mb-6 max-w-3xl" data-reveal>
+      Scegliete solo quello che vi serve per questa gara.
+    </h2>
+    <p class="text-lg text-ink/70 max-w-2xl mb-14" data-reveal>
+      Selezionate i prodotti, poi mandateci la lista con il form qui sotto: vi rispondiamo con un preventivo su misura e la data di consegna confermata. Nessun acquisto qui, solo la richiesta.
+    </p>
+
+    <div id="kit-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 mb-8">
+      {GOLF_PRODUCTS.map((p) => (
+        <button
+          type="button"
+          class="kit-item group relative text-left bg-white border-2 border-ink/10 rounded-2xl overflow-hidden hover:border-orange transition"
+          data-slug={p.slug}
+          data-name={p.name}
+          aria-pressed="false"
+        >
+          <div class="absolute top-3 right-3 z-10 w-7 h-7 rounded-full border-2 border-cream bg-ink/20 backdrop-blur flex items-center justify-center kit-item-check">
+            <svg viewBox="0 0 20 20" class="w-4 h-4 text-cream opacity-0 kit-item-checkmark" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          {p.type === 'photo' ? (
+            <div class="aspect-square bg-gray-light">
+              <img src={p.image} alt={p.name} class="w-full h-full object-cover" width="400" height="400" loading="lazy" />
+            </div>
+          ) : (
+            <div class={`aspect-square ${p.blockBg} ${p.blockText} flex items-center p-4`}>
+              <p class="font-display-tight text-lg leading-[1.05]">{p.name}</p>
+            </div>
+          )}
+          <div class="p-4">
+            {p.type === 'photo' && <p class="font-display text-sm text-ink leading-snug mb-1">{p.name}</p>}
+            <p class="text-xs text-ink/75 leading-snug">{p.description}</p>
+          </div>
+        </button>
+      ))}
+    </div>
+
+    <div class="bg-navy text-cream rounded-2xl p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-6 md:gap-10" data-reveal>
+      <div class="flex-1">
+        <p id="kit-selection-count" class="font-display-tight text-2xl md:text-3xl mb-1">Nessun prodotto selezionato</p>
+        <p id="kit-selection-list" class="text-sm text-cream/70"></p>
+      </div>
+      <a
+        href="#richiesta"
+        id="kit-cta"
+        class="btn-orange shrink-0 inline-block text-center bg-orange text-cream py-4 px-8 text-sm font-bold tracking-wide rounded-full hover:bg-cream hover:text-ink transition"
+        style="text-decoration:none;"
+      >
+        Richiedi il preventivo per il tuo kit →
+      </a>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function() {
+    var selected = [];
+    var grid = document.getElementById('kit-grid');
+    var countEl = document.getElementById('kit-selection-count');
+    var listEl = document.getElementById('kit-selection-list');
+    if (!grid) return;
+
+    function render() {
+      if (selected.length === 0) {
+        countEl.textContent = 'Nessun prodotto selezionato';
+        listEl.textContent = 'Scegliete uno o più prodotti qui sopra.';
+      } else {
+        countEl.textContent = selected.length === 1 ? '1 prodotto selezionato' : selected.length + ' prodotti selezionati';
+        listEl.textContent = selected.map(function(s) { return s.name; }).join(', ');
+      }
+    }
+
+    grid.querySelectorAll('.kit-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        var slug = item.getAttribute('data-slug');
+        var name = item.getAttribute('data-name');
+        var idx = selected.findIndex(function(s) { return s.slug === slug; });
+        var checkmark = item.querySelector('.kit-item-checkmark');
+        var check = item.querySelector('.kit-item-check');
+        if (idx === -1) {
+          selected.push({ slug: slug, name: name });
+          item.setAttribute('aria-pressed', 'true');
+          item.classList.add('border-orange');
+          if (checkmark) checkmark.style.opacity = '1';
+          if (check) { check.style.background = '#FE5000'; check.style.borderColor = '#FE5000'; }
+        } else {
+          selected.splice(idx, 1);
+          item.setAttribute('aria-pressed', 'false');
+          item.classList.remove('border-orange');
+          if (checkmark) checkmark.style.opacity = '0';
+          if (check) { check.style.background = ''; check.style.borderColor = ''; }
+        }
+        render();
+      });
+    });
+
+    var ctaLink = document.getElementById('kit-cta');
+    if (ctaLink) {
+      ctaLink.addEventListener('click', function() {
+        var textarea = document.querySelector('#richiesta textarea[name="messaggio"]');
+        if (textarea && selected.length > 0) {
+          var list = selected.map(function(s) { return s.name; }).join(', ');
+          var prefix = 'Prodotti selezionati: ' + list + '.\n\n';
+          if (textarea.value.indexOf('Prodotti selezionati:') === -1) {
+            textarea.value = prefix + textarea.value;
+          }
+        }
+      });
+    }
+
+    render();
+  })();
+</script>
