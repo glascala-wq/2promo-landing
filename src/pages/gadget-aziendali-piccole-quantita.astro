@@ -13,8 +13,8 @@ const faqItems = [
     open: true,
   },
   {
-    q: 'Perché non c’è un carrello per comprare subito?',
-    a: 'Perché lavoriamo a preventivo: ogni richiesta (quantità piccola, kit con più prodotti o personalizzazione fuori standard) passa da una persona vera che prepara un preventivo su misura, non da un configuratore automatico.',
+    q: 'Perché passa tutto da un preventivo, invece di un acquisto diretto?',
+    a: 'Perché per una quantità piccola, un kit con più prodotti diversi o una personalizzazione fuori standard, la combinazione giusta si trova meglio parlandone con una persona: vi aiuta a valutare le opzioni caso per caso, invece di forzare la richiesta in un formato fisso.',
   },
   {
     q: 'Devo pagare prima di vedere come sarà il gadget personalizzato?',
@@ -25,7 +25,7 @@ const faqItems = [
 
 <BaseLayout
   title="Gadget Aziendali Piccole Quantità, Senza Minimi | 2promo"
-  description="Gadget aziendali personalizzati anche in piccole quantità: niente minimi assurdi, bozza gratuita prima di pagare. Richiedi il preventivo su misura."
+  description="Gadget aziendali personalizzati anche in piccole quantità o kit misti: preventivo su misura preparato da una persona, bozza gratuita prima di pagare."
 >
   <Breadcrumbs items={[{ name: 'Gadget piccole quantità', url: '/gadget-aziendali-piccole-quantita' }]} />
   <UrgencyBar />
@@ -35,13 +35,13 @@ const faqItems = [
     <div class="absolute inset-0 glow-orange pointer-events-none opacity-60"></div>
     <div class="relative max-w-4xl mx-auto px-6 pt-16 pb-12 md:pt-20 md:pb-16">
       <div class="flex items-center gap-3 mb-6" data-reveal>
-        <span class="eyebrow text-orange">perché a preventivo, non a carrello</span>
+        <span class="eyebrow text-orange">richieste su misura, risposta di una persona</span>
       </div>
       <h1 class="font-display-tight text-[8vw] md:text-[4vw] leading-[0.95] text-ink mb-6 max-w-3xl" data-reveal>
-        Gadget aziendali in piccole quantità: niente carrello, solo preventivo.
+        Gadget aziendali in piccole quantità, kit misti o su misura: ve li prepariamo insieme.
       </h1>
       <p class="text-xl md:text-2xl text-ink/75 max-w-2xl leading-relaxed" data-reveal>
-        Un e-commerce standard vende quello che ha a catalogo, come ce l'ha, nella quantità che decide lui. Se cercate gadget aziendali in piccole quantità, un kit con più prodotti diversi o una personalizzazione che non è tra le opzioni del menu a tendina, diventate un imprevisto da smaltire in fretta. Non un cliente. Da 2promo funzioniamo al contrario: niente carrello, si lavora a preventivo. Non è un limite del sito, è il motivo per cui riusciamo a dirvi di sì anche quando la richiesta non è standard.
+        Una quantità piccola, un kit con più prodotti diversi da abbinare, una personalizzazione che non rientra nelle opzioni standard: sono richieste che cambiano da cliente a cliente, e che una persona valuta meglio di un modulo fisso. Da 2promo, per questo tipo di richieste lavoriamo a preventivo: raccontateci cosa vi serve e troviamo insieme la combinazione giusta, qualunque sia la quantità di partenza.
       </p>
     </div>
   </header>
@@ -50,19 +50,19 @@ const faqItems = [
     <div class="max-w-4xl mx-auto px-6 space-y-14">
 
       <div>
-        <h2 class="font-display-tight text-2xl md:text-3xl text-ink leading-tight mb-4">Il problema con i marketplace a carrello</h2>
+        <h2 class="font-display-tight text-2xl md:text-3xl text-ink leading-tight mb-4">Quando una richiesta su misura fa la differenza</h2>
         <div class="text-ink/70 leading-relaxed space-y-4">
-          <p>Cercate gadget aziendali in piccole quantità e vi ritrovate davanti a un carrello che pretende 500 pezzi minimi, un configuratore automatico e zero possibilità di parlare con qualcuno prima di pagare. Il kit con tre prodotti diversi da abbinare? O lo comprate uno a uno su tre siti diversi, o niente. La personalizzazione un po' fuori standard? Non è prevista dal sistema, quindi non esiste.</p>
-          <p>Il problema è strutturale: un e-commerce a catalogo vende quello che ha, come ce l'ha, nelle quantità che decide lui. Se la vostra esigenza è piccola, mista o fuori standard, non siete un cliente da coltivare. Siete un'eccezione scomoda. E la bozza di come verrà il prodotto, quando c'è, spesso arriva dopo il pagamento: quando ormai è tardi per cambiare idea.</p>
+          <p>Una quantità piccola, un kit con più prodotti diversi da abbinare, una personalizzazione un po' fuori standard: sono tutte richieste che raramente entrano in un formato fisso, e che una persona sa valutare meglio caso per caso, aiutandovi a trovare la combinazione giusta invece di forzarla in un'opzione predefinita.</p>
+          <p>Per questo trattiamo gli ordini piccoli o particolari con la stessa attenzione di una commessa grande: la vostra richiesta arriva a una persona vera, non a un sistema automatico, e la bozza di come verrà il prodotto la vedete prima di decidere, non dopo.</p>
         </div>
       </div>
 
       <div>
-        <h2 class="font-display-tight text-2xl md:text-3xl text-ink leading-tight mb-4">Come funziona da 2promo: preventivo, non carrello</h2>
+        <h2 class="font-display-tight text-2xl md:text-3xl text-ink leading-tight mb-4">Come funziona da 2promo</h2>
         <div class="text-ink/70 leading-relaxed space-y-4">
-          <p>Da noi non c'è un carrello perché non ne serve uno: scrivete cosa vi serve (anche un kit con più prodotti diversi, anche una personalizzazione che non avete mai visto altrove) e vi risponde una persona con un preventivo su misura. Siamo un fornitore di gadget con consulenza vera, non un modulo che sputa fuori un prezzo a scatola chiusa.</p>
+          <p>Scrivete cosa vi serve (anche un kit con più prodotti diversi, anche una personalizzazione che non avete mai visto altrove) e vi risponde una persona con un preventivo su misura. Per queste richieste, è un fornitore di gadget con consulenza vera a fare la differenza, non un prezzo generato in automatico.</p>
           <p>Sulle quantità la differenza si sente: su gran parte del catalogo standard potete ordinare anche un solo pezzo come campione, prima di impegnarvi su un lotto più grande. Sulla <a href="/custom" class="text-orange underline">linea custom</a>, dove il prodotto lo costruiamo su misura per voi, i minimi restano bassi ma variano per famiglia: si parte da 10 pezzi sull'abbigliamento, si sale a 50 sui calzini full-jacquard e a 100 su shopper in cotone e lanyard eventi, pensati per eventi piccoli, regali corporate mirati o una pre-serie prima di lanciare il progetto in grande. Gadget personalizzati senza minimo d'ordine assurdo, appunto.</p>
-          <p>E prima di pagare qualsiasi cosa, vedete una bozza pre-stampa: sempre gratuita, inclusa nel preventivo, senza impegno. Se non vi convince, si rivede. Mai un mockup spedito dopo che avete già pagato.</p>
+          <p>E prima di pagare qualsiasi cosa, nella grande maggioranza dei casi vedete una bozza pre-stampa gratuita, inclusa nel preventivo, senza impegno: se non vi convince, si rivede. Per alcuni prodotti specifici, in base alla tecnica di produzione, la conferma arriva in una fase successiva, ma ve lo segnaliamo sempre in anticipo nel preventivo, non a sorpresa a pagamento avvenuto.</p>
         </div>
       </div>
 
