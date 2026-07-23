@@ -41,6 +41,20 @@ git branch -d <slug-task>
 
 Se il merge dà conflitti, risolvili a mano prima di pushare — non forzare, non scartare il lavoro di un'altra sessione.
 
+## Attenzione: deploy Cloudflare da un worktree
+
+`wrangler pages deploy` decide Production vs Preview in base al nome del branch git locale. Da un worktree il branch si chiama come lo slug del task, non `main`, quindi un deploy lanciato da lì **verrebbe pubblicato solo come anteprima, non sul sito live**, senza errori evidenti (il comando "riesce" comunque). Controllane sempre l'esito con:
+
+```bash
+npx wrangler pages deployment list --project-name 2promo-landing
+```
+
+la riga più recente deve avere `Environment: Production` e `Branch: main`. Per pubblicare in produzione da un worktree, specifica il branch esplicitamente:
+
+```bash
+npx wrangler pages deploy dist --project-name 2promo-landing --branch main
+```
+
 ## Perché
 
 Più sessioni che editano gli stessi file nella stessa cartella si sovrascrivono a vicenda senza preavviso. Il worktree isola ogni sessione nella propria copia di lavoro: i conflitti, se ci sono, si affrontano una sola volta al merge, non in continuazione mentre si lavora.
