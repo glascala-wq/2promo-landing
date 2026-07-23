@@ -21,13 +21,11 @@ export default defineConfig({
     }),
     sitemap({
       // escludi pagine di servizio dalla sitemap
-      // /golf: noindex iniziale finché il verticale non è approvato per il lancio (brief §8)
       filter: (page) =>
         !page.includes('/grazie') &&
         !page.includes('/cookie') &&
         !page.includes('/privacy') &&
-        !page.includes('/termini') &&
-        !page.includes('/golf'),
+        !page.includes('/termini'),
     }),
   ],
   vite: {

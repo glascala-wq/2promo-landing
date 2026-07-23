@@ -1,6 +1,6 @@
 # Report: Verticale Golf (`/golf`)
 
-Branch `golf` su `glascala-wq/2promo-landing`. Sviluppato in autonomia secondo `PROJECTS/2promo/verticale-golf/cc-brief-golf.md`, approvato da Giovanni il 21 luglio 2026, con correzioni di rotta date da Giovanni in sessione lo stesso giorno e il giorno dopo (vedi "Round 2" - "Round 11" più sotto).
+**Stato: live in produzione su `2promo.it/golf` dal 22 luglio 2026**, indicizzabile (noindex rimosso). Branch `golf` mergiato su `main`. Sviluppato in autonomia secondo `PROJECTS/2promo/verticale-golf/cc-brief-golf.md`, approvato da Giovanni il 21 luglio 2026, con correzioni di rotta date da Giovanni in sessione lo stesso giorno e nei giorni successivi (vedi "Round 2" - "Round 11" più sotto).
 
 ## Cosa c'è (stato attuale, dopo Round 11)
 
@@ -94,6 +94,17 @@ Giovanni ha chiesto di ri-eseguire l'audit sistematico sui 72 prodotti Ultima Di
 
 Tra queste, finalmente una foto pulita di banchetto: **Banchetto FastFrame**, nessun modello, nessun logo fornitore, grafica dimostrativa con uccelli origami su montagne. Sostituisce il campione di tessuto usato come compromesso dal Round 8. **"Banchetto segreteria" ha ora una foto vera del prodotto per la prima volta in questo progetto.** Il selettore "Componi il tuo kit" resta a 13 prodotti, tutti con foto reale a colori, e non ha più nessuna scelta di compromesso "prodotto sbagliato" (restano solo due render invece di foto, per tovaglia e banchetto: qualità corretta, solo non fotografie).
 
+## Round 12, lancio pubblico (22 luglio)
+
+Giovanni ha approvato il lancio ("andiamo online"). Eseguito:
+
+1. **Merge `golf` → `main`**: nel frattempo `main` era avanzato molto con lavoro di un'altra sessione in parallelo (nuova sezione `/allestimenti`, già live). Verificato il diff prima del merge: nessun file esistente del sito toccato da golf, un solo file (`astro.config.mjs`) modificato da entrambi i lati ma in punti diversi, merge automatico pulito senza conflitti. Build di verifica locale completa prima del push.
+2. **Deploy in produzione**: push su `main` innesca il deploy automatico Cloudflare Pages esistente (diverso dal branch `golf`, che richiedeva deploy manuale). Verificato `2promo.it/golf` raggiungibile, titolo corretto, 13 prodotti, form funzionante.
+3. **Rimosso `noindex`** dalla pagina principale (`src/pages/golf/index.astro`) e la relativa esclusione dalla sitemap (`astro.config.mjs`): la pagina è ora indicizzabile da Google. `/golf/grazie` resta `noindex`, stesso pattern della `/grazie` generale del sito (le thank-you page non si indicizzano mai).
+4. **Menu principale**: confermato con Giovanni di non aggiungere "Golf" per ora, resta raggiungibile solo via URL diretto/ads/outreach come da brief originale.
+
+Nota operativa: durante il merge, un'altra sessione ha continuato a pushare su `main` in parallelo (inclusi due commit che toccavano la stessa foto gazebo appena sistemata su golf). Nessuna perdita di lavoro, ma serve un metodo più esplicito per coordinare sessioni concorrenti sullo stesso branch/repo in futuro.
+
 ## Lighthouse (build di produzione, locale, dopo Round 4)
 
 | Pagina | Performance | Accessibility | Best Practices | SEO |
@@ -140,7 +151,7 @@ La prima versione di `/golf` misurava Performance 87: l'LCP (il testo H1 dell'he
 
 - Riempire `TBD-REGISTRY.md` (buffer giorni, tempi riordino, label conversione Ads)
 - Decidere se e quando pubblicare un prezzo reale
-- Foto mancanti (tessile golf, più banner/totem/banchetto/roll up): recuperarle da area riservata fornitore o con un servizio fotografico proprio
+- Le due foto ancora "render, non fotografia" (tovaglia, banchetto): sostituire quando disponibile un campione fisico fotografato in proprio, o foto vera da area riservata fornitore
 - Creare la conversione Google Ads golf e valorizzare `PUBLIC_GOLF_ADS_CONVERSION_LABEL` su Cloudflare Pages
-- Rimuovere `noindex` quando il verticale è pronto per il lancio pubblico
 - Valutare se "Componi il tuo kit" deve restare un selettore semplice o diventare un vero configuratore con quantità
+- ~~Rimuovere `noindex` quando il verticale è pronto per il lancio pubblico~~ fatto, Round 12 (22/07)

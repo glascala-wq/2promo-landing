@@ -2,6 +2,10 @@
 
 Elenco completo di ogni placeholder `[TBD-*]` introdotto per il verticale `/golf`. Nessuno di questi valori è stato inventato: vanno riempiti da Giovanni/Cowork in un passaggio unico, poi rimossi da questo registro.
 
+## Lancio pubblico (22/07)
+
+Giovanni ha approvato il lancio: branch `golf` mergiato su `main`, deployato in produzione su `2promo.it/golf`. Tolto il `noindex` dalla pagina principale (`src/pages/golf/index.astro`) e la relativa esclusione dalla sitemap (`astro.config.mjs`): la pagina è ora indicizzabile. `/golf/grazie` resta `noindex` di proposito, stesso pattern della `/grazie` generale del sito (le thank-you page non si indicizzano mai, a prescindere dallo stato del verticale). Nessuna voce aggiunta al menu principale: confermato non necessario "per ora".
+
 ## Prezzi
 
 Niente prezzo pubblicato sul sito: il modello è "componi il tuo kit", selezione prodotti più richiesta preventivo via form, con un pulsante "Richiedi il preventivo" al posto del prezzo. Nessun placeholder di prezzo da riempire finché non si decide di pubblicare un listino.
