@@ -19,13 +19,13 @@ const faqItems = [
 ];
 
 const categories = [
-  { name: 'Fondali', desc: 'Per il retro banco o un photo backdrop.', type: 'photo', image: '/allestimenti/products/fondale.webp' },
-  { name: 'Totem', desc: 'Informativi o direzionali, per l’ingresso.', type: 'photo', image: '/allestimenti/products/totem.webp' },
-  { name: 'Banchetti', desc: 'Da esposizione o da reception.', type: 'photo', image: '/allestimenti/products/banchetto.webp' },
-  { name: 'Segnaletica', desc: 'Per orientare i visitatori nello spazio.', type: 'photo', image: '/allestimenti/products/segnaletica.webp' },
-  { name: 'Gazebo', desc: 'Per gli spazi esterni.', type: 'photo', image: '/allestimenti/products/gazebo.webp' },
-  { name: 'Bandiere', desc: 'Pubblicitarie, per l’esterno dello stand.', type: 'photo', image: '/allestimenti/products/bandiere.webp' },
-  { name: 'Roll-up e banner', desc: 'Per la comunicazione a parete o a pavimento.', type: 'photo', image: '/allestimenti/products/rollup.webp' },
+  { name: 'Fondali', image: '/allestimenti/products/fondale.webp' },
+  { name: 'Totem', image: '/allestimenti/products/totem.webp' },
+  { name: 'Banchetti', image: '/allestimenti/products/banchetto.webp' },
+  { name: 'Segnaletica', image: '/allestimenti/products/segnaletica.webp' },
+  { name: 'Gazebo', image: '/allestimenti/products/gazebo.webp' },
+  { name: 'Bandiere', image: '/allestimenti/products/bandiere.webp' },
+  { name: 'Roll-up e banner', image: '/allestimenti/products/rollup.webp' },
 ];
 ---
 
@@ -64,17 +64,10 @@ const categories = [
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
           {categories.map((c) => (
             <div class="cat-card relative rounded-3xl overflow-hidden aspect-square" data-reveal>
-              {c.type === 'photo' ? (
-                <div class="relative w-full h-full bg-gray-light">
-                  <img src={c.image} alt={c.name} class="w-full h-full object-cover" width="400" height="400" loading="lazy" />
-                  <p class="absolute bottom-0 left-0 right-0 p-4 font-display text-sm text-cream bg-gradient-to-t from-ink/80 to-transparent pt-8">{c.name}</p>
-                </div>
-              ) : (
-                <div class={`w-full h-full p-5 flex flex-col justify-between ${c.bg} ${c.text}`}>
-                  <p class="font-display-tight text-lg md:text-xl leading-[1.05]">{c.name}</p>
-                  <p class="text-xs opacity-80 leading-snug">{c.desc}</p>
-                </div>
-              )}
+              <div class="relative w-full h-full bg-gray-light">
+                <img src={c.image} alt={c.name} class="w-full h-full object-cover" width="400" height="400" loading="lazy" />
+                <p class="absolute bottom-0 left-0 right-0 p-4 font-display text-sm text-cream bg-gradient-to-t from-ink/80 to-transparent pt-8">{c.name}</p>
+              </div>
             </div>
           ))}
         </div>
